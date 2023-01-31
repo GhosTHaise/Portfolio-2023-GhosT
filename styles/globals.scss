@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    box-sizing: 0;
+    padding: 0;
+    margin: 0;
+    scroll-behavior: smooth;
+}
+
+/* Header */
+.app{
+    @apply bg-primary ;
+}
+
+.app__container{
+    @apply w-full min-h-screen flex flex-row;
+}
+
+.app__flex{
+    @apply items-center justify-center;
+}
+
+.app__wrapper{
+    @apply flex-1 w-full flex-col xs:px-16 xs:py-8 pt-16 pl-4 pb-8;
+}
+
+.copyright{
+    @apply w-full pt-8 pl-0 pb-0 flex flex-col justify-end items-end;
+    p {
+        @apply uppercase text-blackColor;
+    }
+}
+/* end */
