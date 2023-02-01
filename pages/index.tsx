@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
-import { Header } from '@/components'
-
+import { Header,Footer,About,Testimonial,Work,Skills, } from '@/Container'
+import { Navbar } from '@/components'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
@@ -14,17 +14,22 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* Header */}
-      <Header />
-      {/* Hero */}
-
-      {/* Experience */}
-
-      {/* Skills */}
-
-      {/* Projects */}
-
-      {/* Contact Me */}
+      <div className='app'>
+            {/* Navbar */}
+            <Navbar />
+            {/* Header */}
+            <Header />
+            {/* About */}
+            <About /> 
+            {/* Work */}
+            <Work />
+            {/* Skills */}
+            <Skills />
+            {/* Testimonial */}
+            <Testimonial />
+            {/* Footer */}
+            <Footer />
+      </div>
     </>
   )
 }
