@@ -2,8 +2,10 @@ import React from 'react'
 
 type Props = {}
 
-export default function Header({}: Props) {
+function Header({}: Props) {
   return (
     <div>Header</div>
   )
 }
+
+export default Header
