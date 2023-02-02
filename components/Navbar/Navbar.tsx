@@ -1,10 +1,17 @@
 import React from 'react'
-
+import {images} from "../../constants";
 type Props = {}
 
 const Navbar = (props: Props) => {
   return (
-    <div>Navbar</div>
+    <nav>
+      <div>
+        <img 
+        src={images.logo.src} 
+        alt="logo" 
+        className="" />
+      </div>
+    </nav>
   )
 }
 
