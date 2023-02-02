@@ -1,5 +1,6 @@
 import React from 'react'
-import {images} from "../../constants";
+import {images,variable} from "../../constants";
+
 type Props = {}
 
 const Navbar = (props: Props) => {
@@ -11,6 +12,14 @@ const Navbar = (props: Props) => {
         alt="logo" 
         className="" />
       </div>
+      <ul>
+        {variable.navbarConstants.map((item,index)=>(
+          <li key={`link-${index}`}>
+            <div />
+            <a href={`#${item}`}>{item}</a>
+          </li>
+        ))}
+      </ul>
     </nav>
   )
 }
