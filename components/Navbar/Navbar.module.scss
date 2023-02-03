@@ -1,3 +1,45 @@
+%center{
+    @apply justify-center items-center;
+}
+
 .app__navbar{
-    @apply w-full flex  justify-between items-center;
+    @apply w-full flex  justify-between items-center
+     bg-[rgba(255,255,255,0.25)] backdrop-blur-[4px]
+     border border-solid border-[rgba(255,255,255,0.18)]
+     fixed z-[2]
+     ;
 } 
+ 
+.app__navbar_logo{
+    @apply flex justify-start items-center;
+
+    img{
+        @apply w-[90px] h-[20px] xl:w-[180px] xl:w-[40px] ;
+    }
+}
+
+.app__navbar_links{
+    @apply flex-1 flex list-none ;
+    @extend %center;
+    li{
+        @apply my-0 mx-4 cursor-pointer flex flex-col;
+        @extend %center;
+
+        div{
+            @apply w-[5px] h-[5px] bg-transparent rounded-full mb-[5px];
+        }  
+        a{
+            @apply text-grayColor flex-col uppercase 
+            font-medium transition-all transition-[0.3s] ease-in-out;
+            
+            &:hover{
+                @apply text-secondary;
+            }
+        }
+        &:hover{
+            div{
+                @apply bg-secondary;
+            }
+        }
+    }
+}
