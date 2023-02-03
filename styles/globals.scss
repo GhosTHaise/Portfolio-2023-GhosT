@@ -19,11 +19,11 @@
 }
 
 .app__flex{
-    @apply items-center justify-center;
+    @apply flex items-center justify-center;
 }
 
 .app__wrapper{
-    @apply flex-1 w-full flex-col xs:px-16 xs:py-8 pt-16 pl-4 pb-8;
+    @apply flex-1 w-full flex-col max-[450px]:px-16 max-[450px]:py-8 pt-16 pl-4 pb-8;
 }
 
 .copyright{
@@ -31,5 +31,17 @@
     p {
         @apply uppercase text-blackColor; 
     }
+}
+
+.head-text{
+    @apply text-[2.75rem] xl:text-[4rem] max-xs:text-[2rem] font-bold text-center text-blackColor capitalize;
+
+    span{
+        @apply text-secondary;
+    }
+}
+
+.p-text{
+    @apply xl:text-[1.75rem] text-[0.8rem] text-left text-grayColor leading-[1.5]
 }
 /* end */
