@@ -7,7 +7,7 @@ type Props = {}
 
 function Header({}: Props) {
   return (
-    <div className={styles.app__Header && styles.app__flex}>
+    <div className={`${styles.app__Header} app__flex`}>
         <m.div
           whileInView={{x : [-100,0],opacity : [0,1]}}
           transition={{duration : 0.5}}
@@ -41,10 +41,18 @@ function Header({}: Props) {
         whileInView={{opacity : [0,1]}}
         transition={{duration : 0.5,delayChildren : 0.5}}
         className={styles.app__header_img}>
-            <Image 
+            <img 
+                
                 src={images.profile.src} 
                 alt="profile_bg" 
                 className='' />
+            <m.img 
+            src={images.circle.src}
+            alt="profile_circle"
+            whileInView={{scale : [0,1]}}
+            transition={{duration : 1 ,ease:"easeInOut"}}
+            className={styles.overlay_circle}
+            />
         </m.div>
         <m.div>
 
