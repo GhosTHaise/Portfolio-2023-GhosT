@@ -44,4 +44,8 @@
 .p-text{
     @apply xl:text-[1.75rem] text-[0.8rem] text-left text-grayColor leading-[1.5]
 }
+
+.bold_text{
+    @apply xl:font-[2rem] max-xs:font-[.9rem] text-[1rem] font-extrabold text-blackColor text-left ;
+}
 /* end */
