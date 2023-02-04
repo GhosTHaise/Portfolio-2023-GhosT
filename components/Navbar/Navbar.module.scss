@@ -1,3 +1,4 @@
+
 %center{
     @apply justify-center items-center;
 }
@@ -6,7 +7,7 @@
     @apply w-full flex  justify-between items-center
      bg-[rgba(255,255,255,0.25)] backdrop-blur-[4px]
      border border-solid border-[rgba(255,255,255,0.18)]
-     fixed z-[2]
+     fixed z-[2] py-4 px-8
      ;
 } 
  
@@ -19,7 +20,7 @@
 }
 
 .app__navbar_links{
-    @apply flex-1 flex list-none ;
+    @apply flex-1 max-md:hidden flex list-none ;
     @extend %center;
     li{
         @apply my-0 mx-4 cursor-pointer flex flex-col;
@@ -39,6 +40,42 @@
         &:hover{
             div{
                 @apply bg-secondary;
+            }
+        }
+    }
+}
+
+.app__navbar_menu{
+    @apply w-[35px] h-[35px] rounded-full relative md:hidden flex justify-center items-center bg-secondary cursor-pointer;
+
+    svg{
+        @apply w-[70%] h-[70%] text-whiteColor ;
+    }
+
+    div{
+        @apply fixed top-0 bottom-0 right-0 z-[5] p-4 w-[80%] h-screen flex
+        justify-end items-end md:hidden flex-col bg-whiteColor bg-cover bg-repeat ;
+        /* for more precision */
+        box-shadow: 0 0 20px rgba(168,168,168,0.15);
+
+        svg{
+            @apply w-[35px] h-[35px] text-secondary my-2 mx-4 cursor-pointer;
+        }
+
+        ul{
+            @apply list-none m-0 p-0 w-full h-full flex justify-start items-start flex-col; 
+        
+            li{
+                @apply m-4;
+                
+                a{
+                    @apply text-grayColor text-[1rem] uppercase font-medium
+                        transition-all transition-[.3s] ease-in-out;
+
+                        &:hover{
+                            @apply text-secondary;
+                        }
+                }
             }
         }
     }

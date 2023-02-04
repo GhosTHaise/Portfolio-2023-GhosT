@@ -1,10 +1,15 @@
-import React from 'react'
+import {useState} from 'react'
 import {images,variable} from "../../constants";
 import styles from "./Navbar.module.scss";
+import {HiMenuAlt4,HiX} from "react-icons/hi";
+import {motion as m} from "framer-motion";
 
 type Props = {}
 
 const Navbar = (props: Props) => {
+
+  const [toggle, setToggle] = useState(false)
+
   return (
     <nav className={styles.app__navbar}>
       <div className={styles.app__navbar_logo}>
@@ -21,6 +26,27 @@ const Navbar = (props: Props) => {
           </li>
         ))}
       </ul>
+      <div className={styles.app__navbar_menu}>
+          <HiMenuAlt4 onClick={()=> setToggle(true)}/>
+          {toggle
+              && 
+            (
+              <m.div
+              whileInView={{ x : [300,0]}}
+              transition={{ duration : .85,ease : "easeOut"}}
+              style={{backgroundImage : `url(${images.bgWhite.src})`}}
+              >
+                  <HiX onClick={()=> setToggle(false)} />
+                  <ul>
+                      {variable.navbarConstants.map((item,index)=>(
+                          <li className={styles.app__flex && styles.p_text} key={`${index}`}>
+                            <a href={`#${item}`} onClick={() =>setToggle(false)}>{item}</a>
+                          </li>
+                      ))}
+                  </ul>
+              </m.div>
+            )}
+      </div>
     </nav>
   )
 }
