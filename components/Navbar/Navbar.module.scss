@@ -70,7 +70,7 @@
                 
                 a{
                     @apply text-grayColor text-[1rem] uppercase font-medium
-                        transition-all transition-[.3s] ease-in-out;
+                        transition-[.3s] ease-in-out;
 
                         &:hover{
                             @apply text-secondary;
