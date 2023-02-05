@@ -13,10 +13,10 @@ const Navbar = (props: Props) => {
   return (
     <nav className={styles.app__navbar}>
       <div className={styles.app__navbar_logo}>
-        <img 
-        src={images.logo.src} 
-        alt="logo" 
-        className="" />
+          <img 
+          src={images.logo.src} 
+          alt="logo" 
+          className="" />
       </div>
       <ul className={styles.app__navbar_links}>
         {variable.navbarConstants.map((item,index)=>(

@@ -1,0 +1,15 @@
+#home{
+    @apply relative bg-cover bg-repeat bg-center;
+    
+    .app__wrapper{
+        @apply p-0;
+
+        .copyright{
+            @apply hidden;
+        }
+    }
+}
+
+.app__header{
+    @apply flex-[1] h-full w-full lg:flex-col flex-row xl:pt-32 pt-24  pr-16 pb-0;
+}

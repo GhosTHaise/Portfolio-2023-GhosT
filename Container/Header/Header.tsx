@@ -8,8 +8,8 @@ type Props = {}
 function Header({}: Props) {
   const scaleVariants = {
     WhileInView:{
-      scale : [0.1],
-      opacity : [0.1],
+      scale : [0,1],
+      opacity : [0,1],
       transition : {
           duration  :1,
           ease : "easeInOut"
@@ -17,7 +17,10 @@ function Header({}: Props) {
     }
   }
   return (
-    <div className={`${styles.app__Header} app__flex`}>
+    <div id={styles.home} 
+    className={`${styles.app__Header} app__flex`}
+    style={{backgroundImage : `url(${images.bgIMG})`}}
+    >
         <m.div
           whileInView={{x : [-100,0],opacity : [0,1]}}
           transition={{duration : 0.5}}
@@ -52,7 +55,6 @@ function Header({}: Props) {
         transition={{duration : 0.5,delayChildren : 0.5}}
         className={styles.app__header_img}>
             <img 
-                
                 src={images.profile.src} 
                 alt="profile_bg" 
                 className='' />
@@ -70,11 +72,14 @@ function Header({}: Props) {
         className={styles.app__header_circle}
         >
           {
-            [images.flutter.src,images.redux.src,images.sass.src].map((circle,index)=>(
-                <div key={`circle-${index}`} className={`${styles.circle_cmp} app__flex`}>
+            [
+              images.flutter.src,
+              images.redux.src,
+              images.sass.src].map((circle,index)=>(
+                <div key={`circle-${index.toString()}`} className={`${styles.circle_cmp} app__flex`}>
                     <img 
                     src={circle} 
-                    alt={`circle-${index}`} 
+                    alt={`circle-${index.toString()}`} 
                     className=""/>
                 </div>  
             ))

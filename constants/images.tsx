@@ -37,6 +37,8 @@ import spotify from '../assets/spotify.png';
 
 
 import bgWhite from "../assets/bgWhite.png";
+import bgIMG from "../assets/bgIMG.png"
+
 export default {
   email,
   mobile,
@@ -71,5 +73,6 @@ export default {
   nb,
   skype,
   spotify,
-  bgWhite
+  bgWhite,
+  bgIMG
 };
