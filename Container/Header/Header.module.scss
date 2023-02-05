@@ -11,5 +11,19 @@
 }
 
 .app__header{
-    @apply flex-[1] h-full w-full lg:flex-col flex-row xl:pt-32 pt-24  pr-16 pb-0;
+    @apply flex-[1] h-full w-full max-[1200px]:flex-col flex-row xl:pt-3
+     max-xs:pt-24 pt-24 max-xs:pr-4 pr-16 max-xs:pb-8 pb-0;
+}
+
+.app__header_info{
+    @apply flex-[0.65] flex flex-col justify-start items-start h-full max-xl:w-full max-xl:pr-0;
+}
+
+.app__header_badge{
+    @apply  w-full flex justify-end items-end flex-col;
+
+    .badge_cmp,.tag_cmp{
+        @apply py-4 px-8 border-whiteColor rounded-[15px] flex-row w-auto;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
 }

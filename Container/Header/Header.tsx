@@ -29,7 +29,7 @@ function Header({}: Props) {
             <div className={styles.app__header_badge}>
                 <div className={`app__flex ${styles.badge_cmp}`}>
                       <span>
-
+                        👋
                       </span>
                       <div className='ml-[20]'>
                           <p className="p-text">
