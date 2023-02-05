@@ -6,6 +6,16 @@ import styles from "./Header.module.scss";
 type Props = {}
 
 function Header({}: Props) {
+  const scaleVariants = {
+    WhileInView:{
+      scale : [0.1],
+      opacity : [0.1],
+      transition : {
+          duration  :1,
+          ease : "easeInOut"
+       }
+    }
+  }
   return (
     <div className={`${styles.app__Header} app__flex`}>
         <m.div
@@ -54,8 +64,21 @@ function Header({}: Props) {
             className={styles.overlay_circle}
             />
         </m.div>
-        <m.div>
-
+        <m.div
+        variants={scaleVariants}
+        whileInView={scaleVariants.WhileInView}
+        className={styles.app__header_circle}
+        >
+          {
+            [images.flutter.src,images.redux.src,images.sass.src].map((circle,index)=>(
+                <div key={`circle-${index}`} className={`${styles.circle_cmp} app__flex`}>
+                    <img 
+                    src={circle} 
+                    alt={`circle-${index}`} 
+                    className=""/>
+                </div>  
+            ))
+          }
         </m.div>
     </div>
   )
