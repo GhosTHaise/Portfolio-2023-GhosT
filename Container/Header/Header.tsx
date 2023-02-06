@@ -22,12 +22,12 @@ function Header({}: Props) {
     style={{backgroundImage : `url(${images.bgIMG.src})`}}
     >
         <m.div
-          whileInView={{x : [-100,10],opacity : [0,1]}}
+          whileInView={{x : [-100,0],opacity : [0,1]}}
           transition={{duration : 0.5}}
           className={styles.app__header_info}
         >
             <div className={styles.app__header_badge}>
-                <div className={`app__flex ${styles.badge_cmp}`}>
+                <div className={`${styles.badge_cmp} app__flex`}>
                       <span>
                         👋
                       </span>
@@ -50,6 +50,7 @@ function Header({}: Props) {
                 </div>
             </div>
         </m.div>
+
         <m.div
         whileInView={{opacity : [0,1]}}
         transition={{duration : 0.5,delayChildren : 0.5}}
@@ -66,6 +67,7 @@ function Header({}: Props) {
             className={styles.overlay_circle}
             />
         </m.div>
+
         <m.div
         variants={scaleVariants}
         whileInView={scaleVariants.WhileInView}
@@ -73,10 +75,11 @@ function Header({}: Props) {
         >
           {
             [
-              images.flutter.src,
               images.redux.src,
+              images.react.src,
               images.sass.src].map((circle,index)=>(
-                <div key={`circle-${index.toString()}`} className={`${styles.circle_cmp} app__flex`}>
+                <div key={`circle-${index.toString()}`} 
+                className={`${styles.circle_cmp} app__flex`}>
                     <img 
                     src={circle} 
                     alt={`circle-${index.toString()}`} 
