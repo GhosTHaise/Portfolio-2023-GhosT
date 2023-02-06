@@ -11,8 +11,13 @@
 }
 
 .app__header{
-    @apply flex-[1] h-full w-full  max-[1200px]:flex-col flex-row xl:pt-3
-     max-xs:pt-24 pt-24 max-xs:pr-4 pr-16 max-xs:pb-8 pb-0;
+    @apply flex flex-[1] h-full w-full  max-[1200px]:flex-col flex-row ;
+    
+    padding: 6rem 2rem 0;
+    @apply xl:pt-32;
+    @media screen and (max-width : 450px){
+        padding: 6rem 1rem 2rem;
+    }
 }
 
 .app__header_info{
@@ -63,5 +68,17 @@
         div{
             margin : 1rem;
         }
+    }
+}
+
+.app__header_img{
+    @apply flex-[1] h-full flex justify-end items-end relative max-lg:my-8 max-lg:mx-0;
+    
+    img{
+        @apply w-full object-contain z-[1];
+    }
+
+    .overlay_circle{
+        @apply absolute left-0 right-0 bottom-0 z-[0] w-full h-[90%];
     }
 }

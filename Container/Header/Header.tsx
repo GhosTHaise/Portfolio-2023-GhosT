@@ -18,7 +18,7 @@ function Header({}: Props) {
   }
   return (
     <div id={styles.home} 
-    className={`app__flex ${styles.app__header}`}
+    className={` ${styles.app__header} app__flex`}
     style={{backgroundImage : `url(${images.bgIMG.src})`}}
     >
         <m.div
