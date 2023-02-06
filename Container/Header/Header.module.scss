@@ -11,7 +11,7 @@
 }
 
 .app__header{
-    @apply flex-[1] h-full w-full max-[1200px]:flex-col flex-row xl:pt-3
+    @apply flex-[1] h-full w-full  max-[1200px]:flex-col flex-row xl:pt-3
      max-xs:pt-24 pt-24 max-xs:pr-4 pr-16 max-xs:pb-8 pb-0;
 }
 
@@ -20,10 +20,20 @@
 }
 
 .app__header_badge{
-    @apply  w-full flex justify-end items-end flex-col;
+    @apply  w-full flex justify-end items-end flex-col max-xl:justify-start max-xl:items-start;
 
     .badge_cmp,.tag_cmp{
         @apply py-4 px-8 border-whiteColor rounded-[15px] flex-row w-auto;
         box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    .tag_cmp{
+        @apply flex-col mt-12;
+
+        p{
+            @apply w-full uppercase text-right
+        }
+    }
+    span{
+        @apply xl:text-[5rem] text-[2.5rem] ;
     }
 }

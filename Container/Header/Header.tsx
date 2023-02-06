@@ -18,11 +18,11 @@ function Header({}: Props) {
   }
   return (
     <div id={styles.home} 
-    className={`${styles.app__Header} app__flex`}
-    style={{backgroundImage : `url(${images.bgIMG})`}}
+    className={`app__flex ${styles.app__header}`}
+    style={{backgroundImage : `url(${images.bgIMG.src})`}}
     >
         <m.div
-          whileInView={{x : [-100,0],opacity : [0,1]}}
+          whileInView={{x : [-100,10],opacity : [0,1]}}
           transition={{duration : 0.5}}
           className={styles.app__header_info}
         >
@@ -31,7 +31,7 @@ function Header({}: Props) {
                       <span>
                         👋
                       </span>
-                      <div className='ml-[20]'>
+                      <div className='ml-[20px]'>
                           <p className="p-text">
                             Hello,I am
                           </p>
