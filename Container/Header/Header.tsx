@@ -1,5 +1,4 @@
 import React from 'react'
-import Image from 'next/image';
 import {motion as m} from "framer-motion";
 import {images} from "../../constants";
 import styles from "./Header.module.scss";

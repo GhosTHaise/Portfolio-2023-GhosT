@@ -13,7 +13,7 @@ module.exports = {
         secondary : "#313bac",
         blackColor : "#030303",
         lightGray : "#e4e4e4",
-        grayColor : "6b7688",
+        grayColor : "#6b7688",
         brownColor:"#46364a",
         whiteColor : "#ffffff"
       },

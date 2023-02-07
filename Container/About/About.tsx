@@ -9,12 +9,12 @@ const About = (props: Props) => {
   return (
     <>
       <h2 className='head-text'>
-          I Know That
+          I Know That{" "}
           <span>
-            Good Design
+            Good {/* Design */} Apps
           </span>
           <br />
-              means
+              means{" "}
           <span>
             Good Business
           </span>

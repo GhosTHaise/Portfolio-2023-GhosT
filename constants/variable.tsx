@@ -10,22 +10,22 @@ export default {
     ],
     About : [
         { 
-            title : "Web Developmen" , 
+            title : "Web Development" , 
             description : "I am a good Web Developper",
             ImageUrl : images.about01.src
         },
         { 
-            title : "Web Design" , 
+            title : "Mobile Development" , 
             description : "I am a good Web Developper",
             ImageUrl : images.about02.src
         },
         { 
             title : "Ui/UX" , 
-            escription : "I am a good Web Developper",
+            description : "I am a good Web Developper",
             ImageUrl : images.about03.src
         },
         { 
-            title : "Web Animation" , 
+            title : "MERN Stack" , 
             description : "I am a good Web Developper",
             ImageUrl : images.about04.src
         }

@@ -1,0 +1,16 @@
+.app__about{
+    @apply flex-[1] w-full flex-col;
+}
+
+.app__profiles{
+    @apply flex justify-center items-start flex-wrap mt-8;
+}
+
+.app__profile_item{
+    @apply xl:w-[370px] w-[190px] flex justify-start items-start flex-col m-8 xl:my-8 xl:mx-16;
+
+    img {
+        @apply w-full h-[170px] xl:h-[320px] rounded-[15px] object-cover;
+    }
+
+}
