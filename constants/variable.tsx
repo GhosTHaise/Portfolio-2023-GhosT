@@ -16,17 +16,17 @@ export default {
         },
         { 
             title : "Mobile Development" , 
-            description : "I am a good Web Developper",
+            description : "I am a good Mobile Developper",
             ImageUrl : images.about02.src
         },
         { 
             title : "Ui/UX" , 
-            description : "I am a good Web Developper",
+            description : "I can create good app Design",
             ImageUrl : images.about03.src
         },
         { 
             title : "MERN Stack" , 
-            description : "I am a good Web Developper",
+            description : "I am a Fulstack Developper",
             ImageUrl : images.about04.src
         }
     ]
