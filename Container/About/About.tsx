@@ -2,10 +2,19 @@ import React,{useState,useEffect} from 'react'
 import { motion as m } from 'framer-motion'
 import { variable } from '@/constants';
 import styled from "./About.module.scss";
-
+import { client,urlFor } from '@/client';
+import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 type Props = {}
 
 const About = (props: Props) => {
+  const [abouts, setAbouts] = useState<{title : string ,description : string,imgUrl : SanityImageSource}[]>([]);
+  useEffect(()=>{
+    const query : string = `*[_type == "abouts"]`;
+    client.fetch(query).then((data)=>{
+      console.log(data)
+      setAbouts(data);
+    })
+  },[]);
   return (
     <>
       <h2 className='head-text'>
@@ -21,7 +30,9 @@ const About = (props: Props) => {
       </h2>
 
       <div className={`${styled.app__profiles}`}>
-            {variable.About.map((about,index)=>(
+
+            {abouts.map((about,index)=>(
+              
               <m.div
                 key={`about-${index}`}
                 whileInView={{opacity : [0,1]}}
@@ -30,7 +41,7 @@ const About = (props: Props) => {
                 className={`${styled.app__profile_item}`}
               >
                   <img 
-                  src={about.ImageUrl} 
+                  src={urlFor(about.imgUrl).url()} 
                   alt={about.title}  />
 
                     <h2 className='bold-text' style={{marginTop : 20}}>
