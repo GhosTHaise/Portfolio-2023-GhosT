@@ -6,6 +6,7 @@ export default {
         "contact",
         "work",
         "skills",
+        "testimonials",
         "contact"
     ],
     About : [
