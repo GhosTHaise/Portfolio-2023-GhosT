@@ -2,6 +2,7 @@ import React from 'react'
 import {motion as m} from "framer-motion";
 import {images} from "../../constants";
 import styles from "./Header.module.scss";
+import { AppWrap } from '@/wrapper';
 type Props = {}
 
 function Header({}: Props) {
@@ -16,7 +17,7 @@ function Header({}: Props) {
     }
   }
   return (
-    <div id={styles.home} 
+    <div
     className={` ${styles.app__header} app__flex`}
     style={{backgroundImage : `url(${images.bgIMG.src})`}}
     >
@@ -91,4 +92,4 @@ function Header({}: Props) {
   )
 }
 
-export default Header
+export default AppWrap(Header,"home","");

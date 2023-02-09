@@ -1,7 +1,7 @@
 import React from 'react'
 import { variable } from '@/constants'
 type Props = {
-    active : number
+    active : string
 }
 
 const NavigationDots = (props: Props) => {
@@ -13,7 +13,7 @@ const NavigationDots = (props: Props) => {
                 href={`#${item}`} 
                 className="app__navigation_dot"
                 onClick={() => {}}
-                style={props.active == index ? {backgroundColor : "#313BAC"} : {}}
+                style={props.active == item ? {backgroundColor : "#313BAC"} : {}}
                 />
          ))}
     </div>

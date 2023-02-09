@@ -4,6 +4,7 @@ import { variable } from '@/constants';
 import styled from "./About.module.scss";
 import { client,urlFor } from '@/client';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import { AppWrap } from '@/wrapper';
 type Props = {}
 
 const About = (props: Props) => {
@@ -57,4 +58,4 @@ const About = (props: Props) => {
   )
 }
 
-export default About
+export default AppWrap(About,"about","");
