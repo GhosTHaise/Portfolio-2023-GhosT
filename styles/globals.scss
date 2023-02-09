@@ -48,4 +48,48 @@
 .bold_text{
     @apply xl:font-[2rem] max-xs:font-[.9rem] text-[1rem] font-extrabold text-blackColor text-left ;
 }
+
+.app__social{
+    @apply flex justify-end items-center flex-col p-4;
+    
+    div{
+        @apply xl:w-[70px] w-[40px] xl:h-[70px] h-[40px] rounded-full bg-whiteColor xl:my-[0.5rem] my-[0.25rem] mx-0
+                border border-solid border-lightGray
+                flex justify-center items-center transition-[0.3s] ease-in-out
+                ;
+
+        svg{
+            @apply xl:w-[30px] xl:h-[30px] w-[15px] h-[15px] text-grayColor;
+        }
+
+        &:hover{
+            @apply bg-secondary border-secondary;
+
+            svg{
+                @apply text-whiteColor;
+            }
+        }
+    }
+}
+
+.app__navigation{
+    @apply flex justify-center items-center flex-col p-4;
+    
+    .app__navigation_dot{
+        @apply xl:w-[20px] w-[10px] xl:h-[20px] h-[10px] rounded-full bg-[#cbcbcb] m-2 transition-[0.2s] ease-in-out;
+        
+        &:hover{
+            @apply bg-secondary;
+        }
+    }
+}
+
+@media screen and (max-width : 500px){
+    .app__navigation,.app__social{
+        @apply hidden;
+    }
+    .copyright{
+        padding : 2rem;
+    }
+}
 /* end */
