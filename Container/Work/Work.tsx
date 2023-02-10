@@ -4,12 +4,30 @@ import {motion as m} from "framer-motion";
 import { AppWrap } from '@/wrapper';
 import styles from "./Work.module.scss";
 import { client,urlFor } from '@/client';
+import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 
+type workSanity = {
+  title : string,
+  description : string,
+  projectLink : string,
+  codeLink : string,
+  imgUrl : SanityImageSource,
+  tags : string[]
+}
 type Props = {}
 
 function Work({}: Props) {
   const [activeFilter, setActiveFilter] = useState("All");
   const [animateCard, setAnimateCard] = useState({y : 0,opacity :1});
+  const [works, setWorks] = useState<workSanity[]>([]);
+  const [filterWork, setFilterWork] = useState<workSanity[]>([])
+  useEffect(()=>{
+      const query = `*[_type == "works"]`;
+      client.fetch(query).then( data => {
+        setWorks(data);
+        setActiveFilter(data);
+      })
+  });
 
   const handleWorkFilter = (item : string) => {
 
@@ -45,7 +63,18 @@ function Work({}: Props) {
       transition={{duration : .5,delayChildren : .5}}
       className={styles.app__work_portfolio}
       >
-         
+         {filterWork.map((work,index)=>(
+          <div 
+          key={index}
+          className={`${styles.app__work_item} app__flex`}
+          >
+              <div className={`${styles.app__work_img} app__flex`}>
+                    <img 
+                    src={urlFor(work.imgUrl).url()} 
+                    alt={work.title} />
+              </div>
+          </div>
+         ))}
       </m.div>
     </>
   )
