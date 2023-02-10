@@ -42,7 +42,7 @@ function Header({}: Props) {
                 </div>
                 <div className={`${styles.tag_cmp} app__flex`}>
                       <p className="p-text">
-                            Fullstack Developper
+                            Fullstack Developer
                       </p>
                       <p className="p-text">
                             Freelancer
