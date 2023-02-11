@@ -25,9 +25,9 @@ function Work({}: Props) {
       const query = `*[_type == "works"]`;
       client.fetch(query).then( data => {
         setWorks(data);
-        setActiveFilter(data);
+        setFilterWork(data);
       })
-  });
+  },[]);
 
   const handleWorkFilter = (item : string) => {
 
@@ -72,6 +72,33 @@ function Work({}: Props) {
                     <img 
                     src={urlFor(work.imgUrl).url()} 
                     alt={work.title} />
+
+                    <m.div
+                    whileHover={{opacity : [0,1]}}
+                    transition={{duration : .25,ease : "easeInOut",staggerChildren : .5 }}
+                    className={`${styles.app__work_hover} app__flex`}
+                    >
+                      <a href={work.projectLink} target="_blank" rel='noreferrer'>
+                        <m.div
+                        whileInView={{scale : [0,1]}}
+                        whileHover={{scale : [1,0.9]}}
+                        transition={{duration : .25}}
+                        className={`app__flex`}
+                        >
+                            <AiFillEye />
+                        </m.div>
+                      </a>
+                      <a href={work.codeLink} target="_blank" rel='noreferrer'>
+                        <m.div
+                        whileInView={{scale : [0,1]}}
+                        whileHover={{scale : [1,0.9]}}
+                        transition={{duration : .25}}
+                        className={`app__flex`}
+                        >
+                            <AiFillGithub />
+                        </m.div>
+                      </a>
+                    </m.div>
               </div>
           </div>
          ))}

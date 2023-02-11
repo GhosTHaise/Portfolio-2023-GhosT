@@ -12,7 +12,6 @@ const About = (props: Props) => {
   useEffect(()=>{
     const query : string = `*[_type == "abouts"]`;
     client.fetch(query).then((data)=>{
-      console.log(data)
       setAbouts(data);
     })
   },[]);
