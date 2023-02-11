@@ -121,4 +121,4 @@ function Work({}: Props) {
   )
 }
 
-export default AppWrap(Work,"work")
+export default AppWrap(Work,"work","app__works")
