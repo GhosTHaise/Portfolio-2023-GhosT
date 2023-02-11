@@ -100,16 +100,16 @@ function Work({}: Props) {
                       </a>
                     </m.div>
               </div>
-              <div className={`${styles.app__work_container} app__flex`}>
+              <div className={`${styles.app__work_content} app__flex`}>
                   <h4 className='bold_text'>
                         {work.title}
                   </h4>
-                  <p className='p-text' style={{marginTop : 10}}>
+                  <p className='p-text' style={{marginTop : 10,textAlign : "center"}}>
                         {work.description}
                   </p>
 
                   <div className={`${styles.app__work_tag} app__flex`}>
-                      <p className='p-text'>
+                      <p className='p-text' >
                           {work.tags[0]}
                       </p>
                   </div>

@@ -17,6 +17,9 @@ module.exports = {
         brownColor:"#46364a",
         whiteColor : "#ffffff"
       },
+      fontFamily : {
+        DM : "DM Sans, sans-serif"
+      }
     },
     screens :{
       xs : "480px",
