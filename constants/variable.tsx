@@ -4,8 +4,8 @@ export default {
         "home",
         "about",
         "work",
-        "contact",
         "skills",
+        "contact",
         "testimonials",
         "contact"
     ],

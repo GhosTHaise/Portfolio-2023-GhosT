@@ -55,7 +55,7 @@ function Skills({}: Props) {
                         alt={skill.name} />
                     </div>
                     <p className='p-text'>
-
+                        {skill.name}
                     </p>
                 </m.div>
               ))}
@@ -65,4 +65,4 @@ function Skills({}: Props) {
   )
 }
 
-export default Skills
+export default AppWrap(Skills,"skills","app__skills")
