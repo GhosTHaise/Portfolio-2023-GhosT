@@ -3,8 +3,8 @@ export default {
     navbarConstants : [
         "home",
         "about",
-        "contact",
         "work",
+        "contact",
         "skills",
         "testimonials",
         "contact"
