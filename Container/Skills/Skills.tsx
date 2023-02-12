@@ -4,15 +4,22 @@ import {Tooltip as ReactTooltip} from "react-tooltip"
 import { AppWrap } from '@/wrapper';
 import styles from "./Skills.module.scss";
 import { client,urlFor } from '@/client';
+import { SanityImageSource } from '@sanity/image-url/lib/types/types';
+
+type skills = {
+  name : string,
+  bgColor : string,
+  icon : SanityImageSource
+}
 
 type Props = {}
 
 function Skills({}: Props) {
   const [experience, setExperience] = useState([]);
-  const [skills, setSkills] = useState([])
+  const [skills, setSkills] = useState<skills[]>([])
   
   const experienceQuery = `*[_type == "works"]`;
-  const skillsQuery = `[_type == "skills"]`;
+  const skillsQuery = `*[_type == "skills"]`;
   
   /* Fetch Experience */
   useEffect(()=>{
@@ -35,16 +42,23 @@ function Skills({}: Props) {
       </h2> 
       <div className={`${styles.app__sills_container}`}>
           <m.div className={styles.app__skills_list}>
-              {skills.map((skill)=>(
+              {skills.map( (skill) => (
                 <m.div
                 whileInView={{opacity : [0,1]}}
                 transition={{duration : 0.5}}
                 className={`${styles.app__skills_item} app__flex`}
                 key={skill.name}
                 >
+                    <div className='app__flex' style={{backgroundColor : skill.bgColor}}> 
+                        <img 
+                        src={urlFor(skill.icon).url()} 
+                        alt={skill.name} />
+                    </div>
+                    <p className='p-text'>
 
+                    </p>
                 </m.div>
-              )}
+              ))}
           </m.div>
       </div>
     </>

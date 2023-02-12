@@ -24,6 +24,7 @@ function Work({}: Props) {
   useEffect(()=>{
       const query = `*[_type == "works"]`;
       client.fetch(query).then( data => {
+        console.log(data)
         setWorks(data);
         setFilterWork(data);
       })
@@ -80,7 +81,7 @@ function Work({}: Props) {
           >
               <div className={`${styles.app__work_img} app__flex`}>
                     <img 
-                    src={urlFor(work.imgUrl).url()} 
+                    src={urlFor(work.imgUrl)?.url()} 
                     alt={work.title} />
 
                     <m.div
