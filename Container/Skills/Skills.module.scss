@@ -35,3 +35,57 @@
         @apply font-medium xl:mt-4 mt-2;
     }
 }
+
+.app__skills_exp{
+    @apply flex-[1] flex justify-start items-start flex-col;
+
+    @media screen and (max-width : 900px){
+        //@apply mr-0 justify-center items-center;
+        @apply mt-8;
+    }
+}
+.app__skills_exp_item{
+    @apply w-full flex flex-row justify-start items-start my-4 mx-0;
+}
+
+.app__skills_exp_works{
+    @apply flex-[1];
+    .app__skills_exp_work{
+        @apply flex flex-col justify-start items-start mb-4 cursor-pointer;
+
+        h4{
+            @apply font-normal;
+        }
+        p{
+            @apply font-normal text-grayColor mt-[5px];
+        }
+    }
+}
+
+.app__skills_exp_year{
+    @apply mr-12;
+    p{
+        @apply font-extrabold text-secondary;
+    }
+    @media screen and (max-width : 450px) {
+        @apply mr-4;
+    }
+}
+
+.skills_tooltip{
+    max-width: 300px !important;
+    background-color: var(--white-color) !important;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 5px !important;
+    padding: 1rem !important;
+    color: var(--gray-color) !important;
+    text-align: center !important;
+    line-height: 1.5 !important;
+    opacity: 1 !important;
+  
+    @media screen and (min-width: 2000px) {
+      font-size: 1.75rem !important;
+      max-width: 500px !important;
+      line-height: 2 !important;
+    }
+}

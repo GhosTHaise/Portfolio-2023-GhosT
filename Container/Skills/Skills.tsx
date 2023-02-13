@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,Fragment} from 'react'
 import {motion as m} from "framer-motion";
 import ReactTooltip from "react-tooltip"
 import { AppWrap } from '@/wrapper';
@@ -52,7 +52,7 @@ function Skills({}: Props) {
       <h2 className='head-text'>
           Skills & Experience
       </h2> 
-      <div className={`${styles.app__sills_container}`}>
+      <div className={`${styles.app__skills_container}`}>
           <m.div className={styles.app__skills_list}>
               {skills.map( (skill) => (
                 <m.div
@@ -88,7 +88,7 @@ function Skills({}: Props) {
                         className={styles.app__skills_exp_works}
                         >
                             {experience?.works?.map((work,index)=>(
-                              <>
+                              <Fragment key={"work->"+index.toString()}>
                                 <m.div
                                   key={work.name}
                                   whileInView={{opacity : [0,1]}}
@@ -112,7 +112,7 @@ function Skills({}: Props) {
                                 >
                                     {work.desc}
                                 </ReactTooltip>
-                              </>
+                              </Fragment>
                             ))}
                         </m.div>
                     </m.div>

@@ -18,8 +18,7 @@ function Header({}: Props) {
   }
   return (
     <div
-    className={` ${styles.app__header} app__flex`}
-    style={{backgroundImage : `url(${images.bgIMG.src})`}}
+    className={` ${styles.app__header} ${styles.home} app__flex`}
     >
         <m.div
           whileInView={{x : [-100,0],opacity : [0,1]}}
@@ -92,4 +91,4 @@ function Header({}: Props) {
   )
 }
 
-export default AppWrap(Header,"home","");
+export default AppWrap(Header,"home",styles.home);
