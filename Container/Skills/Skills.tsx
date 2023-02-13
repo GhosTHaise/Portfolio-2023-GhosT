@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import {motion as m} from "framer-motion";
-import {Tooltip as ReactTooltip} from "react-tooltip"
+import ReactTooltip from "react-tooltip"
 import { AppWrap } from '@/wrapper';
 import styles from "./Skills.module.scss";
 import { client,urlFor } from '@/client';
@@ -105,9 +105,10 @@ function Skills({}: Props) {
                                     </p>
                                 </m.div>
                                 <ReactTooltip
-                                  anchorId={work.name}
+                                  id={work.name}
+                                  effect="solid"
+                                  arrowColor="#fff"
                                   className={styles.skills_tooltip}
-                                  
                                 >
                                     {work.desc}
                                 </ReactTooltip>
