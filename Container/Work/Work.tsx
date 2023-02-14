@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import {AiFillEye,AiFillGithub} from "react-icons/ai";
 import {motion as m} from "framer-motion";
-import { AppWrap } from '@/wrapper';
+import { AppWrap, MotionWrap } from '@/wrapper';
 import styles from "./Work.module.scss";
 import { client,urlFor } from '@/client';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
@@ -131,4 +131,4 @@ function Work({}: Props) {
   )
 }
 
-export default AppWrap(Work,"work","app__works")
+export default AppWrap(MotionWrap(Work,styles.app__works),"work","app__primarybg")

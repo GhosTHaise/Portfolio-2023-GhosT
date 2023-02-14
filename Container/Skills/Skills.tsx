@@ -1,7 +1,7 @@
 import React,{useState,useEffect,Fragment} from 'react'
 import {motion as m} from "framer-motion";
 import ReactTooltip from "react-tooltip"
-import { AppWrap } from '@/wrapper';
+import { AppWrap , MotionWrap } from '@/wrapper';
 import styles from "./Skills.module.scss";
 import { client,urlFor } from '@/client';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
@@ -124,4 +124,7 @@ function Skills({}: Props) {
   )
 }
 
-export default AppWrap(Skills,"skills","app__skills")
+export default AppWrap(
+  MotionWrap(Skills,styles.app__skills),
+  "skills",
+  "app__whitebg");
