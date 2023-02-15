@@ -1,0 +1,83 @@
+%transition{
+    transition: all 0.3s ease-in-out;
+}
+.app__footer{
+    @apply flex-[1] w-full flex-col;
+}
+
+.app__footer_cards{
+    @apply w-3/5 flex justify-evenly items-center flex-wrap;
+    margin : 4rem 2rem 2rem;
+
+    @media screen and (max-width : 768px) {
+        width: 100%;
+    }
+}
+
+.app__footer_card{
+    @apply min-w-[290px] flex  flex-row justify-start items-center 
+    my-4 mx-0 p-4 rounded-[10px] cursor-pointer bg-[#fef4f5];
+    @extend %transition;
+
+    img{
+        @apply w-[40px] h-[40px] my-0 mx-[0.7rem];
+    }
+
+    p {
+        @apply font-semibold;
+    }
+
+    a {
+        @apply decoration-[none] font-medium;
+    }
+
+    &:hover{
+        box-shadow: 0 0 25px #fef4f5;
+    }
+
+    @media screen and (max-width : 450px) {
+        width: 100%;
+    }
+}
+
+.app__footer_card:last-child{
+    @apply bg-[#f2f7fb];
+}
+
+.app__footer_form{
+    @apply w-3/5 flex-col my-4 mx-8;
+
+    div{
+        @apply w-full my-[0.75rem] mx-0 rounded-[10px] cursor-pointer bg-primary;
+        @extend %transition;
+
+        input,textarea {
+            @apply w-full p-[0.95rem] border-none rounded-[7px]
+            bg-primary font-DM text-secondary outline-none;
+        }
+
+        textarea{
+            height: 170px;
+        }
+
+        &:hover{
+            box-shadow: 0 0 25px #edf2f8;
+        }
+    }
+
+    button{
+        @apply py-4 px-8 border-none outline-none rounded-[10px]
+        bg-secondary font-medium text-white font-DM;
+        margin : 2rem 0 0 0;
+
+        &:hover{
+            cursor: pointer;
+        }
+    }
+
+    @media screen and (max-width : 768px) {
+        width: 100%;
+        margin: 1rem 0;
+    }
+}
+
