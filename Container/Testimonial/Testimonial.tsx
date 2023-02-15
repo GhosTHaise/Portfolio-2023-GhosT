@@ -42,7 +42,6 @@ function Testimonial({}: Props) {
   } 
 
   return (
-    <div>
         <>
           {
             testimonials.length && (
@@ -100,12 +99,11 @@ function Testimonial({}: Props) {
                 }
           </div>
         </>
-    </div>
   )
 }
 
 export default AppWrap(
-  MotionWrap(Testimonial,"app__testimonial"),
+  MotionWrap(Testimonial,styles.app__testimonial),
   "testimonials",
   "app__primarybg"
 );

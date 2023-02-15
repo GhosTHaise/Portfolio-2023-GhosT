@@ -1,0 +1,82 @@
+.app__testimonial{
+    @apply flex-[1] w-full flex-col
+}
+.app__testimonial_item{
+    @apply w-[60%] xl:min-h-[450px] min-h-[320px] bg-whiteColor flex p-8 rounded-[15px];
+    box-shadow:   0 0 30px rgba(0,0,0,0.1);
+
+    transition: all 0.3s ease-in-out;
+
+    img{
+        @apply xl:w-[150px] w-[100px] xl:h-[150px] h-[100px] rounded-full object-cover;
+    }
+    
+    @media screen and (max-width : 850px) {
+        @apply w-full;
+    }
+
+    @media screen and (max-width : 600px) {
+        @apply flex-col;
+    }
+}
+
+.app__testimonial_content{
+    @apply flex-[1] h-full py-0 px-8 flex flex-col justify-around items-start;
+
+    p{
+        @apply text-[1.25rem] leading-8 text-blackColor font-DM
+    }
+    
+    h4{
+        @apply font-semibold text-secondary mt-8;
+    }
+
+    h5{
+        @apply font-normal text-grayColor mt-[5px];
+    }
+}
+
+.app__testimonial_btns{
+    @apply flex-row mt-4;
+
+    div{
+        @apply w-[50px] h-[50px] rounded-full bg-whiteColor m-4;
+        transition : all 0.3s ease-in-out;
+
+        svg{
+            @apply h-[20px] h-[20px] text-secondary;
+        } 
+        
+        &:hover{
+            @apply cursor-pointer bg-secondary;
+            
+            svg{
+                @apply text-whiteColor;
+            }
+        }
+    }
+}
+
+.app__testimonial_brands{
+    @apply w-4/5 flex-wrap mt-8;
+
+    div{
+        @apply xl:w-[210px] w-[150px] xl:m-8 m-6;
+
+        img{
+            @apply w-full h-auto object-cover  ;
+            filter: grayscale(1);
+        }
+        &:hover{
+            img{
+                filter: grayscale(0);
+            }
+        }
+        @media screen and (max-width : 450px) {
+            @apply w-[120px] m-4;
+        }
+    }
+    @media screen and (max-width : 450px) {
+        @apply w-full;
+    }
+}
