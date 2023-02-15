@@ -28,5 +28,12 @@ export default {
             description : "I am a Fulstack Developper",
             ImageUrl : images.about04.src
         }
-    ]
+    ],
+    socialMedia : 
+    { 
+        facebook : "https://www.facebook.com/profile.php?id=100009485341149",
+        tweeter : "https://twitter.com/NSFitiavana",
+        instagram : "https://www.instagram.com/rfitiavanasambatra/"
+    }
+    
 }
