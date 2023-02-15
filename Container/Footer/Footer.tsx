@@ -26,7 +26,13 @@ function Footer({}: Props) {
         ...formData
       }
 
-      console.log(contact);
+      /* Save data on sanity */
+      client.create(contact)
+        .then(()=>{
+          setLoading(false);
+          setIsFormSubmitted(true);
+        })
+
     setLoading(false);
   }
 
@@ -55,6 +61,8 @@ function Footer({}: Props) {
                 </a>
             </div>
         </div>
+    { 
+      !isFormSubmitted ?   
         <div className={`${styles.app__footer_form} app__flex `}>
             <div className='app__flex'>
                   <input 
@@ -88,6 +96,13 @@ function Footer({}: Props) {
                 {loading ? "Sending ..." : "Send Message"}
             </button>
         </div>
+        :
+        <div>
+            <h3 className='head-text'>
+                  Thank you for getting in touch!
+            </h3>
+        </div>
+    }  
     </>
   )
 }
