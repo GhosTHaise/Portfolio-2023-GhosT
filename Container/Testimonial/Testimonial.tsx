@@ -41,9 +41,9 @@ function Testimonial({}: Props) {
     setCurrentIndex(index);
   } 
 
-  return (
-        <>
-          {
+  /* Testimonial slide */
+  /* 
+  {
             testimonials.length && (
               <>
                 <div className={`${styles.app__testimonial_item} app__flex`}>
@@ -81,7 +81,10 @@ function Testimonial({}: Props) {
                 </div>
               </>
             )
-          }
+          } */
+  return (
+        <>
+          
           <div className={`${styles.app__testimonial_brands} app__flex`}>
                 {
                 brands.map((brand,index)=>(
