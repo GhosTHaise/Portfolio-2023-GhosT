@@ -9,12 +9,12 @@ export const metadata: Metadata = {
   other: {
     "theme-color": "#0d1117",
     "color-scheme": "dark-only",
-    "twitter:image": "https://i.ibb.co/bdSxqGf/New-Profil.png",
+    "twitter:image": "https://i.ibb.co/PT9VLfh/fitiavana-portfolio.png",
     "twitter:card": "summary_large_image",
     "twitter:title": "Fitiavana's portfolio",
     "twitter:description": "Explore the portfolio of Fitiavana, a passionate fullstack developer and data scientist. Dedicated to reaching the greatest heights in technology, Fitiavana showcases expertise in both development and data science.",
     "og:url": "https://fitiavanasambatraportfolio.netlify.app/",
-    "og:image": "https://i.ibb.co/bdSxqGf/New-Profil.png",
+    "og:image": "https://i.ibb.co/PT9VLfh/fitiavana-portfolio.png",
     "og:type": "website",
     "og:title": "Fitiavana's portfolio",
     "og:description": "Explore the portfolio of Fitiavana, a passionate fullstack developer and data scientist. Dedicated to reaching the greatest heights in technology, Fitiavana showcases expertise in both development and data science."
