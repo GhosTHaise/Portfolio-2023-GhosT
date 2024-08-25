@@ -1,10 +1,11 @@
+'use client'
 import React,{useState,useEffect} from 'react'
 import {AiFillEye,AiFillGithub} from "react-icons/ai";
-import {motion as m} from "framer-motion";
 import { AppWrap, MotionWrap } from '@/wrapper';
 import styles from "./Work.module.scss";
 import { client,urlFor } from '@/client';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import { MotionDiv } from '@/components/motionDiv';
 
 type workSanity = {
   title : string,
@@ -46,7 +47,7 @@ function Work({}: Props) {
   return (
     
     <>
-       <h2 className='head-text'>
+       <h2 className='head-text mt-6'>
           My creative{" "}
           <span>
             Portfolio{" "}
@@ -68,7 +69,7 @@ function Work({}: Props) {
             ))
           }
       </div>
-      <m.div
+      <MotionDiv
       animate={animateCard}
       transition={{duration : .5,delayChildren : .5}}
       className={styles.app__work_portfolio}
@@ -83,32 +84,32 @@ function Work({}: Props) {
                     src={urlFor(work.imgUrl)?.url()} 
                     alt={work.title} />
 
-                    <m.div
+                    <MotionDiv
                     whileHover={{opacity : [0,1]}}
                     transition={{duration : .25,ease : "easeInOut",staggerChildren : .5 }}
                     className={`${styles.app__work_hover} app__flex`}
                     >
                       <a href={work.projectLink} target="_blank" rel='noreferrer'>
-                        <m.div
+                        <MotionDiv
                         whileInView={{scale : [0,1]}}
                         whileHover={{scale : [1,0.9]}}
                         transition={{duration : .25}}
                         className={`app__flex`}
                         >
                             <AiFillEye />
-                        </m.div>
+                        </MotionDiv>
                       </a>
                       <a href={work.codeLink} target="_blank" rel='noreferrer'>
-                        <m.div
+                        <MotionDiv
                         whileInView={{scale : [0,1]}}
                         whileHover={{scale : [1,0.9]}}
                         transition={{duration : .25}}
                         className={`app__flex`}
                         >
                             <AiFillGithub />
-                        </m.div>
+                        </MotionDiv>
                       </a>
-                    </m.div>
+                    </MotionDiv>
               </div>
               <div className={`${styles.app__work_content} app__flex`}>
                   <h4 className='bold_text'>
@@ -126,7 +127,7 @@ function Work({}: Props) {
               </div>  
           </div>
          ))}
-      </m.div>
+      </MotionDiv>
     </>
   )
 }

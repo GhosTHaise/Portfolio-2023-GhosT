@@ -1,6 +1,6 @@
+'use client'
 import React,{useEffect,useState} from 'react'
 import {motion as m } from "framer-motion"
-import { HiChevronLeft,HiChevronRight } from 'react-icons/hi'
 import { client,urlFor } from '@/client';
 import { AppWrap , MotionWrap } from '@/wrapper';
 

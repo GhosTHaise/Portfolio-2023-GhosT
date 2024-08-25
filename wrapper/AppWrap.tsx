@@ -9,7 +9,7 @@ const AppWrap = (Container : any,idName : string,className : string) => function
           <div style={{padding : 0}} className='app__wrapper app__flex'>
                 <Container />
                 <div style={idName == "home" ? {display : "none"} : {}} className='copyright'>
-                    <p className='p-text'>@2023 GhosT</p>
+                    <p className='p-text'>@2024 GhosT</p>
                     <p className='p-text'>All rights reserved</p>
                 </div>
           </div>

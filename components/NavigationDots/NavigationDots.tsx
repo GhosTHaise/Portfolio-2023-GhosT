@@ -12,7 +12,6 @@ const NavigationDots = (props: Props) => {
                 key={`${item+index.toString()}`} 
                 href={`#${item}`} 
                 className="app__navigation_dot"
-                onClick={() => {}}
                 style={props.active == item ? {backgroundColor : "#313BAC"} : {}}
                 />
          ))}
