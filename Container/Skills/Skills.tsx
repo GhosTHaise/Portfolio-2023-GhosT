@@ -12,7 +12,7 @@ const Skills = async () => {
 
   return (
     <>
-      <h2 className='head-text mt-8'>
+      <h2 className='head-text mt-6'>
         Skills & Experience
       </h2>
       <div className={`${styles.app__skills_container}`}>

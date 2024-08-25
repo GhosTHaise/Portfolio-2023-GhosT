@@ -47,7 +47,7 @@ function Work({}: Props) {
   return (
     
     <>
-       <h2 className='head-text'>
+       <h2 className='head-text mt-6'>
           My creative{" "}
           <span>
             Portfolio{" "}

@@ -39,7 +39,7 @@ function Footer({}: Props) {
 
   return (
     <>
-        <h2 className='head-text'>
+        <h2 className='head-text mt-6'>
               Take a coffee & chat with me
         </h2>
         <div className={styles.app__footer_cards}>

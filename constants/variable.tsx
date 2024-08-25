@@ -32,7 +32,7 @@ export default {
     socialMedia : 
     { 
         facebook : "https://www.facebook.com/profile.php?id=100009485341149",
-        tweeter : "https://twitter.com/NSFitiavana",
+        github : "https://github.com/GhosTHaise",
         instagram : "https://www.instagram.com/rfitiavanasambatra/"
     }
     
