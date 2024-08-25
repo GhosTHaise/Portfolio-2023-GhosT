@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import {motion as m} from "framer-motion";
 import {images} from "../../constants";

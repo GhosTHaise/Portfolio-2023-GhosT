@@ -1,6 +1,6 @@
+"use client"
 import React,{useState,useEffect} from 'react'
 import { motion as m } from 'framer-motion'
-import { variable } from '@/constants';
 import styled from "./About.module.scss";
 import { client,urlFor } from '@/client';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';

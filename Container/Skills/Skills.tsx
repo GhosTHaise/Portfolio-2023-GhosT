@@ -1,81 +1,47 @@
-import React, { useState, useEffect, Fragment } from 'react'
-import { motion as m } from "framer-motion";
-import ReactTooltip from "react-tooltip"
 import { AppWrap, MotionWrap } from '@/wrapper';
 import styles from "./Skills.module.scss";
-import { client, urlFor } from '@/client';
-import { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import { urlFor } from '@/client';
+import { getAllExperiences, getAllSkills } from '@/lib/actions/sanity.actions';
+import { MotionDiv } from '@/components/motionDiv';
+import ToolTip from "@/components/reactToolTip";
+import Image from 'next/image';
 
-type workExperience = {
-  name: string,
-  company: string,
-  companyLogo: SanityImageSource,
-  desc: string
-}
-
-type experience = {
-  year: string,
-  works: workExperience[]
-}
-
-type skills = {
-  name: string,
-  bgColor: string,
-  icon: SanityImageSource
-}
-
-type Props = {}
-
-function Skills({ }: Props) {
-  const [experiences, setExperiences] = useState<experience[]>([]);
-  const [skills, setSkills] = useState<skills[]>([])
-
-  const experienceQuery = `*[_type == "experiences"]`;
-  const skillsQuery = `*[_type == "skills"]`;
-
-  /* Fetch Experience */
-  useEffect(() => {
-    client.fetch(experienceQuery).then(data => {
-      setExperiences(data);
-    })
-  }, [experienceQuery]);
-
-  /* Fetch Skill */
-  useEffect(() => {
-    client.fetch(skillsQuery).then(data => {
-      setSkills(data);
-    })
-  }, [skillsQuery]);
+const Skills = async () => {
+  const experiences = await getAllExperiences();
+  const skills = await getAllSkills();
 
   return (
     <>
-      <h2 className='head-text'>
+      <h2 className='head-text mt-8'>
         Skills & Experience
       </h2>
       <div className={`${styles.app__skills_container}`}>
-        <m.div className={styles.app__skills_list}>
+        <MotionDiv className={styles.app__skills_list}>
           {skills.map((skill) => (
-            <m.div
+            <MotionDiv
               whileInView={{ opacity: [0, 1] }}
               transition={{ duration: 0.5 }}
               className={`${styles.app__skills_item} app__flex`}
               key={skill.name}
             >
-              <div className='app__flex' style={{ backgroundColor: skill.bgColor }}>
-                <img
+              <div className={`app__flex bg-${skill.bgColor}`}>
+                <Image
                   src={urlFor(skill.icon).url()}
-                  alt={skill.name} />
+                  alt={skill.name} 
+                  width={45}
+                  height={45}
+                />
               </div>
               <p className='p-text'>
                 {skill.name}
               </p>
-            </m.div>
+            </MotionDiv>
           ))}
-        </m.div>
+        </MotionDiv>
         <div className={styles.app__skills_exp}>
           {experiences?.map((experience, index) =>
           (
-            <m.div
+            <MotionDiv
               key={`${experience.year}-0${index}`}
               className={styles.app__skills_exp_item}
             >
@@ -84,12 +50,12 @@ function Skills({ }: Props) {
                   {experience.year}
                 </p>
               </div>
-              <m.div
+              <MotionDiv
                 className={styles.app__skills_exp_works}
               >
                 {experience?.works?.map((work, index) => (
                   <>
-                    <img
+                    <Image
                       src={urlFor(work.companyLogo).url()}
                       alt={work.company}
                       width={60}
@@ -97,7 +63,7 @@ function Skills({ }: Props) {
                       className='object-contain object-top pt-2'
                     />
                     <div className='exp-work-container' key={"work->" + index.toString()}>
-                      <m.div
+                      <MotionDiv
                         key={work.name}
                         whileInView={{ opacity: [0, 1] }}
                         transition={{ duration: 0.5 }}
@@ -111,20 +77,13 @@ function Skills({ }: Props) {
                         <p className='p-text'>
                           {work.company}
                         </p>
-                      </m.div>
-                      <ReactTooltip
-                        id={work.name}
-                        effect="solid"
-                        arrowColor="#fff"
-                        className={styles.skills_tooltip}
-                      >
-                        {work.desc}
-                      </ReactTooltip>
+                      </MotionDiv>
+                      <ToolTip name={work.name} desc={work.desc} className={styles.skills_tooltip} />
                     </div>
                   </>
                 ))}
-              </m.div>
-            </m.div>
+              </MotionDiv>
+            </MotionDiv>
           )
           )}
         </div>

@@ -1,3 +1,4 @@
+'use client'
 import {useState} from 'react'
 import {images,variable} from "../../constants";
 import styles from "./Navbar.module.scss";
