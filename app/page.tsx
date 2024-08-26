@@ -1,6 +1,7 @@
 import { Header, Footer, About, Testimonial, Work, Skills, } from '@/Container'
 import { Navbar } from '@/components'
 import { Metadata } from 'next'
+import { Suspense } from 'react'
 
 export const metadata: Metadata = {
   keywords: "Fitiavana's portfolio 2024 | GhosTHaise",
@@ -33,7 +34,9 @@ export default function Home() {
       {/* About */}
       <About />
       {/* Work */}
-      <Work />
+      <Suspense fallback={<></>}>
+        <Work />
+      </Suspense>
       {/* Skills */}
       <Skills />
       {/* Testimonial */}
