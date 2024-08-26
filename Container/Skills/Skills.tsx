@@ -5,6 +5,7 @@ import { getAllExperiences, getAllSkills } from '@/lib/actions/sanity.actions';
 import { MotionDiv } from '@/components/motionDiv';
 import ToolTip from "@/components/reactToolTip";
 import Image from 'next/image';
+import { Fragment } from 'react';
 
 const Skills = async () => {
   const experiences = await getAllExperiences();
@@ -17,17 +18,17 @@ const Skills = async () => {
       </h2>
       <div className={`${styles.app__skills_container}`}>
         <MotionDiv className={styles.app__skills_list}>
-          {skills.map((skill) => (
+          {skills.map((skill, index) => (
             <MotionDiv
               whileInView={{ opacity: [0, 1] }}
               transition={{ duration: 0.5 }}
               className={`${styles.app__skills_item} app__flex`}
-              key={skill.name}
+              key={`${skill.name}-${index}`}
             >
               <div className={`app__flex bg-${skill.bgColor}`}>
                 <Image
                   src={urlFor(skill.icon).url()}
-                  alt={skill.name} 
+                  alt={skill.name}
                   width={45}
                   height={45}
                 />
@@ -54,7 +55,7 @@ const Skills = async () => {
                 className={styles.app__skills_exp_works}
               >
                 {experience?.works?.map((work, index) => (
-                  <>
+                  <Fragment key={"work->" + index.toString()}>
                     <Image
                       src={urlFor(work.companyLogo).url()}
                       alt={work.company}
@@ -62,7 +63,7 @@ const Skills = async () => {
                       height={60}
                       className='object-contain object-top pt-2'
                     />
-                    <div className='exp-work-container' key={"work->" + index.toString()}>
+                    <div className='exp-work-container'>
                       <MotionDiv
                         key={work.name}
                         whileInView={{ opacity: [0, 1] }}
@@ -80,7 +81,7 @@ const Skills = async () => {
                       </MotionDiv>
                       <ToolTip name={work.name} desc={work.desc} className={styles.skills_tooltip} />
                     </div>
-                  </>
+                  </Fragment>
                 ))}
               </MotionDiv>
             </MotionDiv>
