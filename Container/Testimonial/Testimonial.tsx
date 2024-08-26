@@ -1,45 +1,46 @@
 'use client'
-import React,{useEffect,useState} from 'react'
-import {motion as m } from "framer-motion"
-import { client,urlFor } from '@/client';
-import { AppWrap , MotionWrap } from '@/wrapper';
+import React, { useEffect, useState } from 'react'
+import { motion as m } from "framer-motion"
+import { client, urlFor } from '@/client';
+import { AppWrap, MotionWrap } from '@/wrapper';
 
 import styles from "./Testimonials.module.scss"
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import Image from 'next/image';
 
 type Testimonials = {
-  name : string,
-  company : string,
-  imgurl : SanityImageSource,
-  feedback : string
+  name: string,
+  company: string,
+  imgurl: SanityImageSource,
+  feedback: string
 }
 
 type Brands = {
-  imgUrl : SanityImageSource,
-  name : string
+  imgUrl: SanityImageSource,
+  name: string
 }
 type Props = {}
 
-function Testimonial({}: Props) {
+function Testimonial({ }: Props) {
 
   const [brands, setBrands] = useState<Brands[]>([]);
   const [testimonials, setTestimonials] = useState<Testimonials[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  useEffect(()=>{
+  useEffect(() => {
     const testimonialsQuery = `*[_type == "testimonials"]`;
     const brandsQuery = `*[_type == "brands"]`;
-    client.fetch(testimonialsQuery).then( data => {
+    client.fetch(testimonialsQuery).then(data => {
       setTestimonials(data);
     });
-    client.fetch(brandsQuery).then( data => {
+    client.fetch(brandsQuery).then(data => {
       setBrands(data);
     });
-  },[]);
+  }, []);
 
-  const  handleClick = (index : number) : void => {
+  const handleClick = (index: number): void => {
     setCurrentIndex(index);
-  } 
+  }
 
   /* Testimonial slide */
   /* 
@@ -83,30 +84,32 @@ function Testimonial({}: Props) {
             )
           } */
   return (
-        <>
-          
-          <div className={`${styles.app__testimonial_brands} app__flex`}>
-                {
-                brands.map((brand,index)=>(
-                  <m.div
-                  key={brand.name}
-                  whileInView={{opacity: [0,1]}}
-                  transition={{duration : 0.5 , type : "tween"}}
-                  >
-                        <img
-                          src={urlFor(brand.imgUrl).url()}
-                          alt={brand.name}
-                        />
-                  </m.div>
-                ))
-                }
-          </div>
-        </>
+    <>
+
+      <div className={`${styles.app__testimonial_brands} app__flex`}>
+        {
+          brands.map((brand, index) => (
+            <m.div
+              key={brand.name}
+              whileInView={{ opacity: [0, 1] }}
+              transition={{ duration: 0.5, type: "tween" }}
+            >
+              <Image
+                width={150}
+                height={50}
+                src={urlFor(brand.imgUrl).url()}
+                alt={brand.name}
+              />
+            </m.div>
+          ))
+        }
+      </div>
+    </>
   )
 }
 
 export default AppWrap(
-  MotionWrap(Testimonial,styles.app__testimonial),
+  MotionWrap(Testimonial, styles.app__testimonial),
   "testimonials",
   "app__primarybg"
 );

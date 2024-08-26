@@ -6,6 +6,7 @@ import { MotionDiv } from "../motionDiv";
 import styles from "@/Container/Work/Work.module.scss";
 import { urlFor } from "@/client";
 import { AiFillEye, AiFillGithub } from "react-icons/ai";
+import Image from "next/image";
 
 export const InfiniteMovingCards = ({
     items,
@@ -100,9 +101,11 @@ export const InfiniteMovingCards = ({
                                 className={`${styles.app__work_item} app__flex`}
                             >
                                 <div className={`${styles.app__work_img} app__flex`}>
-                                    <img
+                                    <Image
+                                        fill
                                         src={urlFor(work.imgUrl)?.url()}
-                                        alt={work.title} />
+                                        alt={work.title}
+                                     />
 
                                     <MotionDiv
                                         whileHover={{ opacity: [0, 1] }}
