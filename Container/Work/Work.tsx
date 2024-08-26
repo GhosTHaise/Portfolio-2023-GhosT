@@ -22,6 +22,7 @@ function Work({}: Props) {
   const [animateCard, setAnimateCard] = useState({y : 0,opacity :1});
   const [works, setWorks] = useState<workSanity[]>([]);
   const [filterWork, setFilterWork] = useState<workSanity[]>([])
+  
   useEffect(()=>{
       const query = `*[_type == "works"]`;
       client.fetch(query).then( data => {
@@ -39,7 +40,7 @@ function Work({}: Props) {
       if(item === "All"){
         setFilterWork(works);
       }else{
-        setFilterWork(works.filter((work) => work.tags.includes(item)));
+        setFilterWork(works.filter((work) => work.tags.some(tag => tag.toLocaleLowerCase() === item.toLocaleLowerCase()))); 
       }
     }, 500);
   }
@@ -115,7 +116,7 @@ function Work({}: Props) {
                   <h4 className='bold_text'>
                         {work.title}
                   </h4>
-                  <p className='p-text' style={{marginTop : 10,textAlign : "center"}}>
+                  <p className='p-text line-clamp-2' style={{marginTop : 10,textAlign : "center"}}>
                         {work.description}
                   </p>
 
