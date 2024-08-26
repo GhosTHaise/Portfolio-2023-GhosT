@@ -14,4 +14,13 @@ declare type workExperience = {
     company: string,
     companyLogo: SanityImageSource,
     desc: string
+}
+
+declare type workSanity = {
+    title : string,
+    description : string,
+    projectLink : string,
+    codeLink : string,
+    imgUrl : SanityImageSource,
+    tags : string[]
   }

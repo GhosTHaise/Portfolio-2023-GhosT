@@ -4,17 +4,9 @@ import {AiFillEye,AiFillGithub} from "react-icons/ai";
 import { AppWrap, MotionWrap } from '@/wrapper';
 import styles from "./Work.module.scss";
 import { client,urlFor } from '@/client';
-import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import { MotionDiv } from '@/components/motionDiv';
+import { InfiniteMovingCards } from '@/components/ui/infinite-moving-cards';
 
-type workSanity = {
-  title : string,
-  description : string,
-  projectLink : string,
-  codeLink : string,
-  imgUrl : SanityImageSource,
-  tags : string[]
-}
 type Props = {}
 
 function Work({}: Props) {
@@ -75,59 +67,15 @@ function Work({}: Props) {
       transition={{duration : .5,delayChildren : .5}}
       className={styles.app__work_portfolio}
       >
-         {filterWork.map((work,index)=>(
-          <div 
-          key={index}
-          className={`${styles.app__work_item} app__flex`}
-          >
-              <div className={`${styles.app__work_img} app__flex`}>
-                    <img 
-                    src={urlFor(work.imgUrl)?.url()} 
-                    alt={work.title} />
-
-                    <MotionDiv
-                    whileHover={{opacity : [0,1]}}
-                    transition={{duration : .25,ease : "easeInOut",staggerChildren : .5 }}
-                    className={`${styles.app__work_hover} app__flex`}
-                    >
-                      <a href={work.projectLink} target="_blank" rel='noreferrer'>
-                        <MotionDiv
-                        whileInView={{scale : [0,1]}}
-                        whileHover={{scale : [1,0.9]}}
-                        transition={{duration : .25}}
-                        className={`app__flex`}
-                        >
-                            <AiFillEye />
-                        </MotionDiv>
-                      </a>
-                      <a href={work.codeLink} target="_blank" rel='noreferrer'>
-                        <MotionDiv
-                        whileInView={{scale : [0,1]}}
-                        whileHover={{scale : [1,0.9]}}
-                        transition={{duration : .25}}
-                        className={`app__flex`}
-                        >
-                            <AiFillGithub />
-                        </MotionDiv>
-                      </a>
-                    </MotionDiv>
-              </div>
-              <div className={`${styles.app__work_content} app__flex`}>
-                  <h4 className='bold_text'>
-                        {work.title}
-                  </h4>
-                  <p className='p-text line-clamp-2' style={{marginTop : 10,textAlign : "center"}}>
-                        {work.description}
-                  </p>
-
-                  <div className={`${styles.app__work_tag} app__flex`}>
-                      <p className='p-text' >
-                          {work.tags[0]}
-                      </p>
-                  </div>
-              </div>  
-          </div>
-         ))}
+         <InfiniteMovingCards
+          items={filterWork}
+          speed='slow'
+         />
+         <InfiniteMovingCards
+          items={filterWork.reverse()}
+          speed='slow'
+          direction='right'
+         />
       </MotionDiv>
     </>
   )
