@@ -88,10 +88,13 @@ function Header({ }: Props) {
             images.sass.src].map((circle, index) => (
               <div key={`circle-${index.toString()}`}
                 className={`${styles.circle_cmp} app__flex`}>
-                <img
+                <Image
                   src={circle}
                   alt={`circle-${index.toString()}`}
-                  className="" />
+                  width={100}
+                  height={100}
+                  loading='lazy'
+                />
               </div>
             ))
         }
