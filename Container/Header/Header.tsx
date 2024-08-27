@@ -60,13 +60,19 @@ function Header({ }: Props) {
           src={images.profile.src}
           alt="profile_bg"
           width={532}
-          height={666} />
+          height={666}
+          sizes="(max-width: 480px) 100vw,
+            (max-width: 768px) 80vw,
+            (max-width: 1200px) 70vw,
+            50vw"
+        />
         <MotionImage
           src={images.circle.src}
           alt="profile_circle"
           whileInView={{ scale: [0, 1] }}
           transition={{ duration: 1, ease: "easeInOut" }}
           className={styles.overlay_circle}
+          loading='lazy'
         />
       </MotionDiv>
 
