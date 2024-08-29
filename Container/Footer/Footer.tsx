@@ -1,114 +1,125 @@
 'use client'
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import { images } from '@/constants';
-import { AppWrap,MotionWrap } from '@/wrapper';
-import { client } from '@/client'; 
+import { AppWrap, MotionWrap } from '@/wrapper';
+import { client } from '@/client';
 import styles from "./Footer.module.scss";
+import Image from 'next/image';
 
 type Props = {}
 
-function Footer({}: Props) {
+function Footer({ }: Props) {
 
-  const [formData, setFormData] = useState<{name : string,email : string,message : string}>(
-    { name : "",email : "",message : ""}
+  const [formData, setFormData] = useState<{ name: string, email: string, message: string }>(
+    { name: "", email: "", message: "" }
   );
-  const [isFormSubmitted, setIsFormSubmitted] = useState(false); 
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleChangeinput = (e : React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>  ) => {
-    const {name  , value} = e.target;
-    setFormData({...formData,[name] : value});
+  const handleChangeinput = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   }
 
   const handleSubmit = () => {
     setLoading(true);
-      const contact = {
-        _type : "contact",
-        ...formData
-      }
+    const contact = {
+      _type: "contact",
+      ...formData
+    }
 
-      /* Save data on sanity */
-      client.create(contact)
-        .then(()=>{
-          setLoading(false);
-          setIsFormSubmitted(true);
-        })
+    /* Save data on sanity */
+    client.create(contact)
+      .then(() => {
+        setLoading(false);
+        setIsFormSubmitted(true);
+      })
 
     setLoading(false);
   }
 
   return (
     <>
-        <h2 className='head-text mt-6'>
-              Take a coffee & chat with me
-        </h2>
-        <div className={styles.app__footer_cards}>
-            <div className={styles.app__footer_card}>
-                <img 
-                src={images.email.src} 
-                alt="email" />
+      <h2 className='head-text mt-6'>
+        Take a coffee & chat with me
+      </h2>
+      <div className={styles.app__footer_cards}>
+        <div className={styles.app__footer_card}>
+          <Image
+            src={images.email.src}
+            alt="email"
+            height={40}
+            width={40}
+            loading='lazy'
+            quality={70}
+          />
 
-                <a href="mailto:Ghostrex2@gmail.com" className='p-text'>
-                  Ghostrex2@gmail.com
-                </a>
-            </div>
-            <div className={styles.app__footer_card}>
-                <img 
-                src={images.mobile.src} 
-                alt="email" />
-
-                <a href="tel: +261 (33) 64-986-49" className='p-text'>
-                  +261 33 64 986 49
-                </a>
-            </div>
+          <a href="mailto:Ghostrex2@gmail.com" className='p-text'>
+            Ghostrex2@gmail.com
+          </a>
         </div>
-    { 
-      !isFormSubmitted ?   
-        <div className={`${styles.app__footer_form} app__flex `}>
+        <div className={styles.app__footer_card}>
+          <Image
+            src={images.mobile.src}
+            alt="email"
+            height={40}
+            width={40}
+            loading='lazy'
+            quality={70}
+          />
+
+          <a href="tel: +261 (33) 64-986-49" className='p-text'>
+            +261 33 64 986 49
+          </a>
+        </div>
+      </div>
+      {
+        !isFormSubmitted ?
+          <div className={`${styles.app__footer_form} app__flex `}>
             <div className='app__flex'>
-                  <input 
-                      className='p-text' 
-                      type="text" 
-                      placeholder='Your Name' 
-                      name='name'
-                      value={formData.name} onChange={handleChangeinput}   />
+              <input
+                className='p-text'
+                type="text"
+                placeholder='Your Name'
+                name='name'
+                value={formData.name} onChange={handleChangeinput} />
             </div>
             <div className='app__flex'>
-                  <input 
-                      className='p-text' 
-                      type="email" 
-                      placeholder='Your Email' 
-                      name='email'
-                      value={formData.email} onChange={handleChangeinput}   />
+              <input
+                className='p-text'
+                type="email"
+                placeholder='Your Email'
+                name='email'
+                value={formData.email} onChange={handleChangeinput} />
             </div>
             <div>
-                <textarea 
-                    className='p-text'
-                    placeholder='Your Message'
-                    name="message"
-                    value={formData.message} onChange={handleChangeinput}
-                />
+              <textarea
+                className='p-text'
+                placeholder='Your Message'
+                name="message"
+                value={formData.message} onChange={handleChangeinput}
+              />
             </div>
             <button
               type='button'
               className='p-text'
               onClick={handleSubmit}
-              >
-                {loading ? "Sending ..." : "Send Message"}
+            >
+              {loading ? "Sending ..." : "Send Message"}
             </button>
-        </div>
-        :
-        <div>
+          </div>
+          :
+          <div>
             <h3 className='head-text'>
-                  Thank you for getting in touch!
+              Thank you for getting in touch!
             </h3>
-        </div>
-    }  
+          </div>
+      }
     </>
   )
 }
 
 export default AppWrap(
-  MotionWrap(Footer,styles.app__footer),
+  MotionWrap(Footer, styles.app__footer),
   "contact",
   "app__whitebg");
