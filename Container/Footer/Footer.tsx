@@ -61,15 +61,15 @@ function Footer({ }: Props) {
         <div className={styles.app__footer_card}>
           <Image
             src={images.mobile.src}
-            alt="email"
+            alt="mobile"
             height={40}
             width={40}
             loading='lazy'
             quality={70}
           />
 
-          <a href="tel: +261 (33) 64-986-49" className='p-text'>
-            +261 33 64 986 49
+          <a href="tel: +261 (32) 02-645-58" className='p-text'>
+            +261 32 02 645 58
           </a>
         </div>
       </div>
