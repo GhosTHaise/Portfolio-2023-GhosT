@@ -1,33 +1,67 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+---
 
-## Getting Started
+# 🚀 Next.js 16 Portfolio
 
-First, run the development server:
+A high-performance personal portfolio built with **Next.js 16**, **TypeScript**, and **Tailwind CSS**. This project leverages the latest React Server Components (RSC) and the App Router for optimal SEO and speed.
+
+## 🛠️ Tech Stack
+
+* **Framework:** Next.js 16 (App Router)
+* **Language:** TypeScript
+* **Styling:** Tailwind CSS
+* **Package Manager:** pnpm
+* **Deployment:** Vercel
+
+## 🏁 Getting Started
+
+### 1. Prerequisites
+
+Ensure you have Node.js 18.17.0 or later and **pnpm** installed.
+
+> **Note:** If you are using TypeScript, ensure you are on version **v5.1.0** or higher to maintain compatibility with Next.js 16.
+
+### 2. Installation
+
+Clone the repository and install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+pnpm install
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. Development
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Run the development server:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+```bash
+pnpm dev
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Open [http://localhost:3000](https://www.google.com/search?q=http://localhost:3000) to view your site. The page will hot-reload as you make changes to files in the `app/` directory.
 
-## Learn More
+## 📁 Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+* `app/`: Contains the routes, layouts, and pages.
+* `components/`: Reusable UI components (Atomic Design recommended).
+* `public/`: Static assets like images and fonts.
+* `lib/`: Utility functions and shared logic.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🚀 Key Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome! 
+* **Next/Font:** Automatically optimizes and loads Inter, reducing layout shift.
+* **Server Components:** Minimal client-side JavaScript for faster initial loads.
+* **Type Safety:** Strict TypeScript configuration for robust development.
+* **SEO Optimized:** Built-in Metadata API for better search engine ranking.
 
+## 📖 Deployment
+
+The easiest way to deploy this portfolio is via the [Vercel Platform](https://vercel.com/new).
+
+1. Push your code to GitHub.
+2. Import the project into Vercel.
+3. Vercel will automatically detect Next.js and handle the build process.
+
+---
+
+Would you like me to help you draft a **Technical Skills** or **Projects** section to showcase your experience with React and Node.js?
