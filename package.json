@@ -26,6 +26,7 @@
     "tailwind-merge": "^2.6.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.58.2",
     "autoprefixer": "^10.4.27",
     "eslint": "8.33.0",
     "eslint-config-next": "^14.2.35",
