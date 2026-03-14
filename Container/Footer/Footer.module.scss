@@ -6,7 +6,7 @@
 }
 
 .app__footer_cards{
-    @apply w-3/5 flex justify-evenly items-center flex-wrap;
+    @apply w-3/5 flex justify-evenly items-center flex-wrap px-4;
     margin : 4rem 2rem 2rem;
 
     @media screen and (max-width : 768px) {
@@ -45,7 +45,7 @@
 }
 
 .app__footer_form{
-    @apply w-3/5 flex-col my-4 mx-8;
+    @apply w-3/5 flex-col my-4 mx-8 px-4;
 
     div{
         @apply w-full my-[0.75rem] mx-0 rounded-[10px] cursor-pointer bg-primary;

@@ -37,7 +37,7 @@
 }
 
 .app__skills_exp{
-    @apply flex-[1] flex justify-start items-start flex-col;
+    @apply flex-[1] flex justify-start items-start flex-col px-4;
 
     @media screen and (max-width : 900px){
         //@apply mr-0 justify-center items-center;
