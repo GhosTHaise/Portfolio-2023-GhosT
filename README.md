@@ -1,5 +1,3 @@
----
-
 # 🚀 Next.js 16 Portfolio
 
 A high-performance personal portfolio built with **Next.js 16**, **TypeScript**, and **Tailwind CSS**. This project leverages the latest React Server Components (RSC) and the App Router for optimal SEO and speed.
