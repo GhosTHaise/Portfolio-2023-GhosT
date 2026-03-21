@@ -1,0 +1,322 @@
+// experience.module.scss
+
+// ── CSS custom properties ─────────────────────────────────────────────────────
+
+:root {
+  --exp-timeline:           rgba(0, 0, 0, 0.12);
+  --exp-sub-spine:          rgba(0, 0, 0, 0.10);
+  --exp-dot-bg:             #ffffff;
+  --exp-dot-border:         rgba(0, 0, 0, 0.22);
+  --exp-dot-hover:          #0a66c2;
+  --exp-subdot-bg:          #ffffff;
+  --exp-subdot-border:      rgba(0, 0, 0, 0.20);
+  --exp-card-divider:       rgba(0, 0, 0, 0.07);
+  --exp-logo-bg:            #f4f4f4;
+  --exp-logo-border:        rgba(0, 0, 0, 0.08);
+  --exp-fallback-bg:        #e8f0fe;
+  --exp-fallback-text:      #1a56a0;
+  --exp-company-name:       rgba(0, 0, 0, 0.90);
+  --exp-company-meta:       rgba(0, 0, 0, 0.60);
+  --exp-role-title:         rgba(0, 0, 0, 0.85);
+  --exp-role-meta:          rgba(0, 0, 0, 0.50);
+  --exp-bullet-text:        rgba(0, 0, 0, 0.70);
+  --exp-bullet-dot:         rgba(0, 0, 0, 0.28);
+  --exp-tag-text:           rgba(0, 0, 0, 0.60);
+  --exp-tag-bg:             rgba(0, 0, 0, 0.04);
+  --exp-tag-border:         rgba(0, 0, 0, 0.10);
+  --exp-tag-hover-text:     #0a66c2;
+  --exp-tag-hover-bg:       rgba(10, 102, 194, 0.07);
+  --exp-tag-hover-border:   rgba(10, 102, 194, 0.25);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --exp-timeline:           rgba(255, 255, 255, 0.14);
+    --exp-sub-spine:          rgba(255, 255, 255, 0.10);
+    --exp-dot-bg:             #1c1c1c;
+    --exp-dot-border:         rgba(255, 255, 255, 0.28);
+    --exp-dot-hover:          #70b5f9;
+    --exp-subdot-bg:          #1c1c1c;
+    --exp-subdot-border:      rgba(255, 255, 255, 0.22);
+    --exp-card-divider:       rgba(255, 255, 255, 0.07);
+    --exp-logo-bg:            #2a2a2a;
+    --exp-logo-border:        rgba(255, 255, 255, 0.10);
+    --exp-fallback-bg:        #1a2a40;
+    --exp-fallback-text:      #70b5f9;
+    --exp-company-name:       rgba(255, 255, 255, 0.92);
+    --exp-company-meta:       rgba(255, 255, 255, 0.50);
+    --exp-role-title:         rgba(255, 255, 255, 0.85);
+    --exp-role-meta:          rgba(255, 255, 255, 0.42);
+    --exp-bullet-text:        rgba(255, 255, 255, 0.68);
+    --exp-bullet-dot:         rgba(255, 255, 255, 0.28);
+    --exp-tag-text:           rgba(255, 255, 255, 0.55);
+    --exp-tag-bg:             rgba(255, 255, 255, 0.05);
+    --exp-tag-border:         rgba(255, 255, 255, 0.10);
+    --exp-tag-hover-text:     #70b5f9;
+    --exp-tag-hover-bg:       rgba(112, 181, 249, 0.10);
+    --exp-tag-hover-border:   rgba(112, 181, 249, 0.28);
+  }
+}
+
+// ── SCSS vars ─────────────────────────────────────────────────────────────────
+
+$dot-size:    10px;
+$subdot-size: 8px;
+$logo-size:   52px;
+$card-gap:    14px;
+
+// ── List (outer spine) ────────────────────────────────────────────────────────
+
+.app__exp_list {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-left: 22px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 20px;
+    bottom: 20px;
+    width: 1.5px;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      var(--exp-timeline) 6%,
+      var(--exp-timeline) 94%,
+      transparent 100%
+    );
+  }
+}
+
+// ── Group (one company block) ─────────────────────────────────────────────────
+
+.app__exp_group {
+  display: flex;
+  align-items: flex-start;
+  gap: $card-gap;
+  padding: 20px 0 24px;
+  position: relative;
+
+  & + & {
+    border-top: 1px solid var(--exp-card-divider);
+  }
+
+  &:hover .app__exp_dot {
+    border-color: var(--exp-dot-hover);
+    transform: scale(1.25);
+  }
+}
+
+// ── Outer dot ─────────────────────────────────────────────────────────────────
+
+.app__exp_dot {
+  position: absolute;
+  left: -18px;
+  top: 28px;
+  width: $dot-size;
+  height: $dot-size;
+  border-radius: 50%;
+  background: var(--exp-dot-bg);
+  border: 2px solid var(--exp-dot-border);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+  z-index: 1;
+}
+
+// ── Logo ──────────────────────────────────────────────────────────────────────
+
+.app__exp_logoWrap {
+  flex-shrink: 0;
+  width: $logo-size;
+  height: $logo-size;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--exp-logo-border);
+  background: var(--exp-logo-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app__exp_logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.app__exp_logoFallback {
+  background: var(--exp-fallback-bg);
+}
+
+.app__exp_logoInitials {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--exp-fallback-text);
+  letter-spacing: 0.5px;
+}
+
+// ── Group body ────────────────────────────────────────────────────────────────
+
+.app__exp_groupBody {
+  flex: 1;
+  min-width: 0;
+}
+
+// ── Company header ────────────────────────────────────────────────────────────
+
+.app__exp_companyHeader {
+  margin-bottom: 8px;
+}
+
+.app__exp_companyName {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--exp-company-name);
+  margin: 0 0 2px;
+  line-height: 1.3;
+}
+
+.app__exp_companyMeta {
+  font-size: 13px;
+  color: var(--exp-company-meta);
+  margin: 0 0 1px;
+  font-weight: 400;
+}
+
+.app__exp_companyLocation {
+  font-size: 12.5px;
+  color: var(--exp-role-meta);
+  margin: 0;
+  line-height: 1.5;
+}
+
+// ── Single role (flat — no sub-spine) ─────────────────────────────────────────
+
+.app__exp_singleDateRange {
+  font-size: 12.5px;
+  color: var(--exp-role-meta);
+  margin: 0 0 10px;
+}
+
+// ── Roles container (multiple roles — has inner sub-spine) ────────────────────
+
+.app__exp_roles {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-top: 10px;
+  padding-left: 18px;
+
+  // Inner spine connecting sub-dots
+  &::before {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: var(--exp-sub-spine);
+  }
+}
+
+// ── Individual role row ────────────────────────────────────────────────────────
+
+.app__exp_role {
+  position: relative;
+  padding-bottom: 18px;
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+}
+
+.app__exp_subDot {
+  position: absolute;
+  left: -18px;
+  top: 5px;
+  width: $subdot-size;
+  height: $subdot-size;
+  border-radius: 50%;
+  background: var(--exp-subdot-bg);
+  border: 1.5px solid var(--exp-subdot-border);
+}
+
+.app__exp_roleBody {
+  // nothing special — just flow
+}
+
+.app__exp_roleTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--exp-role-title);
+  margin: 0 0 2px;
+  line-height: 1.3;
+}
+
+.app__exp_roleMeta {
+  font-size: 12.5px;
+  color: var(--exp-role-meta);
+  margin: 0 0 8px;
+}
+
+// ── Bullets ───────────────────────────────────────────────────────────────────
+
+.app__exp_bullets {
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.app__exp_bullet {
+  display: flex;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--exp-bullet-text);
+  line-height: 1.55;
+}
+
+.app__exp_bulletDot {
+  flex-shrink: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--exp-bullet-dot);
+  margin-top: 7px;
+}
+
+// ── Skills ────────────────────────────────────────────────────────────────────
+
+.app__exp_skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.app__exp_skillTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--exp-tag-text);
+  background: var(--exp-tag-bg);
+  border: 1px solid var(--exp-tag-border);
+  border-radius: 20px;
+  padding: 3px 10px 3px 8px;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+
+  svg {
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    color: var(--exp-tag-hover-text);
+    background: var(--exp-tag-hover-bg);
+    border-color: var(--exp-tag-hover-border);
+  }
+}
