@@ -45,22 +45,22 @@ export type ExperienceGroup = {
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 const EMPLOYMENT_LABELS: Record<string, string> = {
-  apprenticeship: 'Contrat en alternance',
-  full_time: 'Temps plein',
-  part_time: 'Temps partiel',
+  apprenticeship: 'Apprenticeship',
+  full_time: 'Full-time',
+  part_time: 'Part-time',
   freelance: 'Freelance',
-  internship: 'Stage',
-  contract: 'Contrat',
+  internship: 'Internship',
+  contract: 'Contract',
 };
 
 const LOCATION_LABELS: Record<string, string> = {
-  on_site: 'Sur site',
-  remote: 'À distance',
-  hybrid: 'Hybride',
+  on_site: 'On-site',
+  remote: 'Remote',
+  hybrid: 'Hybrid',
 };
 
 function fmtDate(d: string) {
-  return new Date(d).toLocaleDateString('fr-FR', {
+  return new Date(d).toLocaleDateString('en-US', {
     month: 'short',
     year: 'numeric',
   });
@@ -75,14 +75,14 @@ function formatDuration(months: number) {
   const years = Math.floor(months / 12);
   const rem = months % 12;
   if (years > 0 && rem > 0)
-    return `${years} an${years > 1 ? 's' : ''} ${rem} mois`;
-  if (years > 0) return `${years} an${years > 1 ? 's' : ''}`;
-  return `${months} mois`;
+    return `${years} yr${years > 1 ? 's' : ''} ${rem} mo`;
+  if (years > 0) return `${years} yr${years > 1 ? 's' : ''}`;
+  return `${months} mo`;
 }
 
 function formatRoleDateRange(exp: ExperienceDoc) {
   const start = fmtDate(exp.startDate);
-  const end = exp.isCurrent ? "aujourd'hui" : exp.endDate ? fmtDate(exp.endDate) : '';
+  const end = exp.isCurrent ? 'present' : exp.endDate ? fmtDate(exp.endDate) : '';
   const dur = formatDuration(durationMonths(exp.startDate, exp.endDate, exp.isCurrent));
   return `${start} - ${end} · ${dur}`;
 }
@@ -128,7 +128,7 @@ export function groupExperiences(experiences: ExperienceDoc[]): ExperienceGroup[
       new Date(r.startDate) > new Date(max.startDate) ? r : max,
     );
     const startLabel = fmtDate(earliest.startDate);
-    const endLabel = latest.isCurrent ? "aujourd'hui" : latest.endDate ? fmtDate(latest.endDate) : '';
+    const endLabel = latest.isCurrent ? 'present' : latest.endDate ? fmtDate(latest.endDate) : '';
 
     // Total span: earliest start → latest end
     const totalMs = g.roles.reduce((sum, r) => sum + durationMonths(r.startDate, r.endDate, r.isCurrent), 0);
