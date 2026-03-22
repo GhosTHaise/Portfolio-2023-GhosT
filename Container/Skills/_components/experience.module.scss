@@ -206,13 +206,12 @@ $card-gap:    14px;
   flex-direction: column;
   position: relative;
   margin-top: 10px;
-  padding-left: 18px;
 
   // Inner spine connecting sub-dots
   &::before {
     content: '';
     position: absolute;
-    left: 3px;
+    left: -15px;
     top: 8px;
     bottom: 8px;
     width: 1px;
