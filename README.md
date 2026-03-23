@@ -8,7 +8,7 @@ A high-performance personal portfolio built with **Next.js 16**, **TypeScript**,
 * **Language:** TypeScript
 * **Styling:** Tailwind CSS
 * **Package Manager:** pnpm
-* **Deployment:** Vercel
+* **Deployment:** netlify
 
 ## 🏁 Getting Started
 
