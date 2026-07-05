@@ -1,7 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
 import { urlFor } from '@/client';
 import styles from './experience.module.scss';
 
@@ -203,9 +204,18 @@ function RoleRow({ exp, index }: { exp: ExperienceDoc; index: number }) {
 
 // ─── CompanyGroup ─────────────────────────────────────────────────────────────
 
-function CompanyGroup({ group, index }: { group: ExperienceGroup; index: number }) {
+function CompanyGroup({
+  group,
+  index,
+  active,
+}: {
+  group: ExperienceGroup;
+  index: number;
+  active: boolean;
+}) {
   const isSingleRole = group.roles.length === 1;
   const singleRole = group.roles[0];
+  const isCurrent = group.roles.some((r) => r.isCurrent);
   const locationLabel = LOCATION_LABELS[group.locationType] ?? group.locationType;
 
   const logoUrl =
@@ -223,22 +233,37 @@ function CompanyGroup({ group, index }: { group: ExperienceGroup; index: number 
       {/* Outer timeline dot */}
       <span className={styles.app__exp_dot} />
 
-      {/* Logo */}
-      <div className={`${styles.app__exp_logoWrap} ${!logoUrl ? styles.app__exp_logoFallback : ''}`}>
-        {logoUrl ? (
-          <Image
-            src={logoUrl}
-            alt={group.company?.name ?? 'Company'}
-            width={48}
-            height={48}
-            className={styles.app__exp_logo}
-          />
-        ) : (
-          <span className={styles.app__exp_logoInitials}>
-            {group.company?.name ? group.company.name.slice(0, 2).toUpperCase() : '??'}
-          </span>
-        )}
-      </div>
+      {/* Logo node */}
+      <motion.div
+        data-exp-logo
+        initial={{ scale: 0.3, opacity: 0 }}
+        whileInView={{ scale: 1, opacity: 1 }}
+        viewport={{ once: true, amount: 0.6 }}
+        transition={{ type: 'spring', stiffness: 320, damping: 18, delay: index * 0.08 }}
+        className={`${styles.app__exp_node} ${active ? styles.app__exp_nodeActive : ''}`}
+      >
+        {/* Soft glow bloom when the travelling head touches this node */}
+        <span className={styles.app__exp_nodeGlow} aria-hidden />
+        <div
+          className={`${styles.app__exp_logoWrap} ${!logoUrl ? styles.app__exp_logoFallback : ''} ${isCurrent ? styles.app__exp_logoCurrent : ''}`}
+        >
+          <div className={styles.app__exp_logoInner}>
+            {logoUrl ? (
+              <Image
+                src={logoUrl}
+                alt={group.company?.name ?? 'Company'}
+                width={48}
+                height={48}
+                className={styles.app__exp_logo}
+              />
+            ) : (
+              <span className={styles.app__exp_logoInitials}>
+                {group.company?.name ? group.company.name.slice(0, 2).toUpperCase() : '??'}
+              </span>
+            )}
+          </div>
+        </div>
+      </motion.div>
 
       {/* Group body */}
       <div className={styles.app__exp_groupBody}>
@@ -316,11 +341,69 @@ function CompanyGroup({ group, index }: { group: ExperienceGroup; index: number 
 
 export default function ExperienceList({ experiences }: { experiences: ExperienceDoc[] }) {
   const groups = groupExperiences(experiences);
+  const ref = useRef<HTMLDivElement>(null);
+  // Same viewport anchor for start & end → progress == the fraction of the
+  // timeline that has passed the "scan line". The fill, the head and every
+  // node therefore share one coordinate system and stay perfectly in sync.
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start 0.6', 'end 0.6'],
+  });
+  const scaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const headTop = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
+  const headOpacity = useTransform(scrollYProgress, [0, 0.02, 0.98, 1], [0, 1, 1, 0]);
+
+  // Fraction of the *top edge* of each node — a node lights up the moment the
+  // travelling head reaches its card (a real "touch"), not once it's centred.
+  const fractions = useRef<number[]>([]);
+  const [activeCount, setActiveCount] = useState(0);
+
+  useEffect(() => {
+    const measure = () => {
+      const list = ref.current;
+      if (!list) return;
+      const h = list.clientHeight || 1;
+      const nodes = Array.from(
+        list.querySelectorAll<HTMLElement>('[data-exp-logo]')
+      );
+      // +6px so it triggers just as the dot enters the card's top edge
+      fractions.current = nodes.map((n) => (n.offsetTop + 6) / h);
+    };
+    measure();
+    const t = setTimeout(measure, 350); // after reveals/layout settle
+    window.addEventListener('resize', measure);
+    return () => {
+      clearTimeout(t);
+      window.removeEventListener('resize', measure);
+    };
+  }, [experiences]);
+
+  useMotionValueEvent(scrollYProgress, 'change', (p) => {
+    const c = fractions.current.filter((f) => p >= f).length;
+    setActiveCount((prev) => (prev === c ? prev : c));
+  });
 
   return (
-    <div className={styles.app__exp_list}>
+    <div ref={ref} className={styles.app__exp_list}>
+      {/* Animated fill that tracks scroll (behind the logo nodes) */}
+      <motion.span
+        aria-hidden
+        className={styles.app__exp_fill}
+        style={{ scaleY }}
+      />
+      {/* Glowing progress head — passes behind the logos */}
+      <motion.span
+        aria-hidden
+        className={styles.app__exp_fillHead}
+        style={{ top: headTop, opacity: headOpacity }}
+      />
       {groups.map((group, i) => (
-        <CompanyGroup key={group.companyKey + i} group={group} index={i} />
+        <CompanyGroup
+          key={group.companyKey + i}
+          group={group}
+          index={i}
+          active={i < activeCount}
+        />
       ))}
     </div>
   );

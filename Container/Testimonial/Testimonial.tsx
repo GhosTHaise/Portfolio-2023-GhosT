@@ -1,115 +1,133 @@
-'use client'
-import React, { useEffect, useState } from 'react'
-import { motion as m } from "framer-motion"
-import { client, urlFor } from '@/client';
-import { AppWrap, MotionWrap } from '@/wrapper';
+"use client";
 
-import styles from "./Testimonials.module.scss"
-import { SanityImageSource } from '@sanity/image-url/lib/types/types';
-import Image from 'next/image';
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import { LuQuote } from "react-icons/lu";
+import { client, urlFor } from "@/client";
+import { images } from "@/constants";
+import { Section } from "@/components/Section";
+import Reveal from "@/components/Reveal";
 
-type Testimonials = {
-  name: string,
-  company: string,
-  imgurl: SanityImageSource,
-  feedback: string
-}
+type Brand = { name: string; cover: string };
+type Testimonial = {
+  name: string;
+  company: string;
+  feedback: string;
+  cover: string;
+};
 
-type Brands = {
-  imgUrl: SanityImageSource,
-  name: string
-}
-type Props = {}
+const FALLBACK_BRANDS: Brand[] = [
+  { name: "Amazon", cover: images.amazon.src },
+  { name: "Adidas", cover: images.adidas.src },
+  { name: "Asus", cover: images.asus.src },
+  { name: "Bolt", cover: images.bolt.src },
+  { name: "New Balance", cover: images.nb.src },
+  { name: "Skype", cover: images.skype.src },
+  { name: "Spotify", cover: images.spotify.src },
+];
 
-function Testimonial({ }: Props) {
-
-  const [brands, setBrands] = useState<Brands[]>([]);
-  const [testimonials, setTestimonials] = useState<Testimonials[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
+export default function Testimonial() {
+  const [brands, setBrands] = useState<Brand[]>([]);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
 
   useEffect(() => {
-    const testimonialsQuery = `*[_type == "testimonials"]`;
-    const brandsQuery = `*[_type == "brands"]`;
-    client.fetch(testimonialsQuery).then(data => {
-      setTestimonials(data);
-    });
-    client.fetch(brandsQuery).then(data => {
-      setBrands(data);
-    });
+    client
+      .fetch(`*[_type == "brands"]`)
+      .then((data) => {
+        if (Array.isArray(data) && data.length) {
+          setBrands(
+            data.map((b: any) => ({
+              name: b.name,
+              cover: b.imgUrl ? urlFor(b.imgUrl).url() : "",
+            }))
+          );
+        }
+      })
+      .catch(() => {});
+
+    client
+      .fetch(`*[_type == "testimonials"]`)
+      .then((data) => {
+        if (Array.isArray(data) && data.length) {
+          setTestimonials(
+            data.map((t: any) => ({
+              name: t.name,
+              company: t.company,
+              feedback: t.feedback,
+              cover: t.imgurl ? urlFor(t.imgurl).url() : "",
+            }))
+          );
+        }
+      })
+      .catch(() => {});
   }, []);
 
-  const handleClick = (index: number): void => {
-    setCurrentIndex(index);
-  }
+  const brandList = brands.length ? brands : FALLBACK_BRANDS;
 
-  /* Testimonial slide */
-  /* 
-  {
-            testimonials.length && (
-              <>
-                <div className={`${styles.app__testimonial_item} app__flex`}>
-                    <img 
-                        src={urlFor(testimonials[currentIndex].imgurl).url()} 
-                        alt={testimonials[currentIndex].name} 
-                    />
-                    <div className={styles.app__testimonial_content}>
-                        <p className={"p-text"}>
-                              {testimonials[currentIndex].feedback}
-                        </p>
-                        <div>
-                            <h4 className='bold_text'>
-                                {testimonials[currentIndex].name}
-                            </h4>
-                            <h5 className='p-text'>
-                                {testimonials[currentIndex].company}
-                            </h5>
-                        </div>
-                    </div>
-                </div>
-                <div className={`${styles.app__testimonial_btns} app__flex`}>
-                    <div 
-                       className='app__flex'
-                       onClick={() => handleClick(currentIndex === 0 ? testimonials.length - 1 : currentIndex - 1)}
-                       >
-                        <HiChevronLeft />
-                    </div>
-                    <div 
-                       className='app__flex'
-                       onClick={() => handleClick(currentIndex === testimonials.length - 1 ? 0 : currentIndex + 1)}
-                       >
-                        <HiChevronRight />
-                    </div>
-                </div>
-              </>
-            )
-          } */
   return (
-    <>
+    <Section id="testimonials" className="!py-16 sm:!py-20">
+      {/* Trusted-by marquee */}
+      <Reveal className="flex flex-col items-center text-center">
+        <span className="eyebrow before:hidden">Trusted by teams &amp; brands</span>
+      </Reveal>
 
-      <div className={`${styles.app__testimonial_brands} app__flex`}>
-        {
-          brands.map((brand, index) => (
-            <m.div
-              key={brand.name}
-              whileInView={{ opacity: [0, 1] }}
-              transition={{ duration: 0.5, type: "tween" }}
+      <div className="marquee-mask relative mt-10 overflow-hidden">
+        <div className="flex w-max animate-marquee items-center hover:[animation-play-state:paused]">
+          {[0, 1].map((dup) => (
+            <div
+              key={dup}
+              className="flex shrink-0 items-center gap-12 pr-12 sm:gap-16 sm:pr-16"
+              aria-hidden={dup === 1}
             >
-              <Image
-                width={150}
-                height={50}
-                src={urlFor(brand.imgUrl).url()}
-                alt={brand.name}
-              />
-            </m.div>
-          ))
-        }
+              {brandList.map((brand) => (
+                <Image
+                  key={`${dup}-${brand.name}`}
+                  src={brand.cover}
+                  alt={brand.name}
+                  width={120}
+                  height={34}
+                  className="h-7 w-auto object-contain opacity-45 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0 sm:h-8"
+                />
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
-    </>
-  )
-}
 
-export default AppWrap(
-  MotionWrap(Testimonial, styles.app__testimonial),
-  "testimonials",
-  "app__primarybg"
-);
+      {/* Testimonial cards (only when CMS has them) */}
+      {testimonials.length > 0 && (
+        <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {testimonials.slice(0, 3).map((t, i) => (
+            <Reveal key={t.name} delay={i * 0.1} className="h-full">
+              <figure className="bento-card flex h-full flex-col">
+                <LuQuote className="text-accent/40" size={30} />
+                <blockquote className="mt-4 flex-1 text-[0.98rem] leading-relaxed text-ink">
+                  “{t.feedback}”
+                </blockquote>
+                <figcaption className="mt-6 flex items-center gap-3 border-t border-line pt-5">
+                  {t.cover && (
+                    <Image
+                      src={t.cover}
+                      alt={t.name}
+                      width={44}
+                      height={44}
+                      className="h-11 w-11 rounded-full object-cover"
+                    />
+                  )}
+                  <div>
+                    <div className="font-display text-sm font-semibold text-ink">
+                      {t.name}
+                    </div>
+                    <div className="font-mono text-[0.72rem] uppercase tracking-wider text-muted">
+                      {t.company}
+                    </div>
+                  </div>
+                </figcaption>
+              </figure>
+            </Reveal>
+          ))}
+        </div>
+      )}
+    </Section>
+  );
+}

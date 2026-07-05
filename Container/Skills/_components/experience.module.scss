@@ -1,321 +1,352 @@
-// experience.module.scss
-
-// ── CSS custom properties ─────────────────────────────────────────────────────
-
-:root {
-  --exp-timeline:           rgba(0, 0, 0, 0.12);
-  --exp-sub-spine:          rgba(0, 0, 0, 0.10);
-  --exp-dot-bg:             #ffffff;
-  --exp-dot-border:         rgba(0, 0, 0, 0.22);
-  --exp-dot-hover:          #0a66c2;
-  --exp-subdot-bg:          #ffffff;
-  --exp-subdot-border:      rgba(0, 0, 0, 0.20);
-  --exp-card-divider:       rgba(0, 0, 0, 0.07);
-  --exp-logo-bg:            #f4f4f4;
-  --exp-logo-border:        rgba(0, 0, 0, 0.08);
-  --exp-fallback-bg:        #e8f0fe;
-  --exp-fallback-text:      #1a56a0;
-  --exp-company-name:       rgba(0, 0, 0, 0.90);
-  --exp-company-meta:       rgba(0, 0, 0, 0.60);
-  --exp-role-title:         rgba(0, 0, 0, 0.85);
-  --exp-role-meta:          rgba(0, 0, 0, 0.50);
-  --exp-bullet-text:        rgba(0, 0, 0, 0.70);
-  --exp-bullet-dot:         rgba(0, 0, 0, 0.28);
-  --exp-tag-text:           rgba(0, 0, 0, 0.60);
-  --exp-tag-bg:             rgba(0, 0, 0, 0.04);
-  --exp-tag-border:         rgba(0, 0, 0, 0.10);
-  --exp-tag-hover-text:     #0a66c2;
-  --exp-tag-hover-bg:       rgba(10, 102, 194, 0.07);
-  --exp-tag-hover-border:   rgba(10, 102, 194, 0.25);
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    --exp-timeline:           rgba(255, 255, 255, 0.14);
-    --exp-sub-spine:          rgba(255, 255, 255, 0.10);
-    --exp-dot-bg:             #1c1c1c;
-    --exp-dot-border:         rgba(255, 255, 255, 0.28);
-    --exp-dot-hover:          #70b5f9;
-    --exp-subdot-bg:          #1c1c1c;
-    --exp-subdot-border:      rgba(255, 255, 255, 0.22);
-    --exp-card-divider:       rgba(255, 255, 255, 0.07);
-    --exp-logo-bg:            #2a2a2a;
-    --exp-logo-border:        rgba(255, 255, 255, 0.10);
-    --exp-fallback-bg:        #1a2a40;
-    --exp-fallback-text:      #70b5f9;
-    --exp-company-name:       rgba(255, 255, 255, 0.92);
-    --exp-company-meta:       rgba(255, 255, 255, 0.50);
-    --exp-role-title:         rgba(255, 255, 255, 0.85);
-    --exp-role-meta:          rgba(255, 255, 255, 0.42);
-    --exp-bullet-text:        rgba(255, 255, 255, 0.68);
-    --exp-bullet-dot:         rgba(255, 255, 255, 0.28);
-    --exp-tag-text:           rgba(255, 255, 255, 0.55);
-    --exp-tag-bg:             rgba(255, 255, 255, 0.05);
-    --exp-tag-border:         rgba(255, 255, 255, 0.10);
-    --exp-tag-hover-text:     #70b5f9;
-    --exp-tag-hover-bg:       rgba(112, 181, 249, 0.10);
-    --exp-tag-hover-border:   rgba(112, 181, 249, 0.28);
-  }
-}
-
-// ── SCSS vars ─────────────────────────────────────────────────────────────────
-
-$dot-size:    10px;
-$subdot-size: 8px;
-$logo-size:   52px;
-$card-gap:    14px;
-
-// ── List (outer spine) ────────────────────────────────────────────────────────
+/* ── Experience timeline — light glass theme ── */
 
 .app__exp_list {
+  position: relative;
   display: flex;
   flex-direction: column;
-  position: relative;
-  padding-left: 22px;
-
-  &::before {
-    content: '';
-    position: absolute;
-    left: 7px;
-    top: 20px;
-    bottom: 20px;
-    width: 1.5px;
-    background: linear-gradient(
-      to bottom,
-      transparent 0%,
-      var(--exp-timeline) 6%,
-      var(--exp-timeline) 94%,
-      transparent 100%
-    );
-  }
+  gap: 1.75rem;
+  width: 100%;
 }
 
-// ── Group (one company block) ─────────────────────────────────────────────────
+/* Vertical spine (track) — full height so it shares the nodes' coordinate space */
+.app__exp_list::before {
+  content: "";
+  position: absolute;
+  left: 23px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--line);
+  border-radius: 2px;
+}
+
+/* Scroll-linked fill overlaying the track */
+.app__exp_fill {
+  position: absolute;
+  left: 23px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  border-radius: 2px;
+  transform-origin: top;
+  background: linear-gradient(to bottom, #6b74cf, var(--secondary));
+  z-index: 0;
+}
+
+/* Soft glowing head that travels down the spine (behind the logo nodes) */
+.app__exp_fillHead {
+  position: absolute;
+  left: 18px;
+  margin-top: -6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--secondary) 40%, rgba(49, 59, 172, 0.35) 70%, transparent 72%);
+  box-shadow: 0 0 16px 5px rgba(49, 59, 172, 0.5);
+  z-index: 0;
+}
+
+@keyframes exp-pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(49, 59, 172, 0.4),
+      0 10px 24px -14px rgba(16, 24, 40, 0.22);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(49, 59, 172, 0),
+      0 10px 24px -14px rgba(16, 24, 40, 0.22);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(49, 59, 172, 0),
+      0 10px 24px -14px rgba(16, 24, 40, 0.22);
+  }
+}
 
 .app__exp_group {
-  display: flex;
-  align-items: flex-start;
-  gap: $card-gap;
-  padding: 20px 0 24px;
   position: relative;
-
-  & + & {
-    border-top: 1px solid var(--exp-card-divider);
-  }
-
-  &:hover .app__exp_dot {
-    border-color: var(--exp-dot-hover);
-    transform: scale(1.25);
-  }
+  display: flex;
+  gap: 1.1rem;
+  align-items: flex-start;
 }
 
-// ── Outer dot ─────────────────────────────────────────────────────────────────
-
+/* The outer decorative dot is replaced by the logo node */
 .app__exp_dot {
-  position: absolute;
-  left: -18px;
-  top: 28px;
-  width: $dot-size;
-  height: $dot-size;
-  border-radius: 50%;
-  background: var(--exp-dot-bg);
-  border: 2px solid var(--exp-dot-border);
-  transition: border-color 0.2s ease, transform 0.2s ease;
-  z-index: 1;
+  display: none;
 }
 
-// ── Logo ──────────────────────────────────────────────────────────────────────
+/* Node = the measured point on the spine; holds the glow + logo */
+.app__exp_node {
+  position: relative;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+}
+
+/* Soft accent bloom behind the logo, fired the moment the head touches it */
+.app__exp_nodeGlow {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(49, 59, 172, 0.45), transparent 68%);
+  opacity: 0;
+  transform: scale(0.5);
+  pointer-events: none;
+  z-index: 0;
+}
 
 .app__exp_logoWrap {
-  flex-shrink: 0;
-  width: $logo-size;
-  height: $logo-size;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid var(--exp-logo-border);
-  background: var(--exp-logo-bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
+  z-index: 1;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: 0 10px 24px -14px rgba(16, 24, 40, 0.22);
+  filter: grayscale(0.6);
+  transition: filter 0.45s ease, border-color 0.45s ease, box-shadow 0.45s ease,
+    background 0.45s ease;
+  will-change: filter, box-shadow;
 }
 
-.app__exp_logo {
+.app__exp_logoInner {
+  display: grid;
+  place-items: center;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 .app__exp_logoFallback {
-  background: var(--exp-fallback-bg);
+  background: linear-gradient(135deg, #eef0fb, #dde0f6);
+  border-color: rgba(49, 59, 172, 0.18);
+}
+
+.app__exp_logo {
+  object-fit: contain;
+  padding: 6px;
 }
 
 .app__exp_logoInitials {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--exp-fallback-text);
-  letter-spacing: 0.5px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--secondary);
 }
 
-// ── Group body ────────────────────────────────────────────────────────────────
+/* Current role — pulsing accent ring */
+.app__exp_logoCurrent {
+  border-color: rgba(49, 59, 172, 0.45);
+  animation: exp-pulse-ring 2.4s ease-out infinite;
+}
+
+/* ── Touch flourish: fires the moment the travelling head reaches the card ── */
+
+/* Logo lights up: grayscale → full colour + accent ring + soft glow */
+.app__exp_nodeActive .app__exp_logoWrap {
+  filter: grayscale(0);
+  background: #fff;
+  border-color: rgba(49, 59, 172, 0.5);
+  box-shadow: 0 0 0 3px rgba(49, 59, 172, 0.14),
+    0 12px 26px -10px rgba(49, 59, 172, 0.5);
+}
+
+/* Gentle settle — subtle, not bouncy */
+.app__exp_nodeActive .app__exp_logoInner {
+  animation: exp-pop 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* One soft glow bloom */
+.app__exp_nodeActive .app__exp_nodeGlow {
+  animation: exp-bloom 0.7s ease-out;
+}
+
+@keyframes exp-bloom {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  35% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.75);
+  }
+}
+
+@keyframes exp-pop {
+  0% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.07);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 
 .app__exp_groupBody {
   flex: 1;
   min-width: 0;
+  padding-bottom: 0.25rem;
 }
 
-// ── Company header ────────────────────────────────────────────────────────────
-
 .app__exp_companyHeader {
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
 }
 
 .app__exp_companyName {
-  font-size: 15px;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
   font-weight: 600;
-  color: var(--exp-company-name);
-  margin: 0 0 2px;
-  line-height: 1.3;
+  color: var(--ink);
+  letter-spacing: -0.01em;
 }
 
 .app__exp_companyMeta {
-  font-size: 13px;
-  color: var(--exp-company-meta);
-  margin: 0 0 1px;
-  font-weight: 400;
+  margin-top: 0.15rem;
+  font-size: 0.85rem;
+  color: var(--secondary);
+  font-weight: 500;
 }
 
-.app__exp_companyLocation {
-  font-size: 12.5px;
-  color: var(--exp-role-meta);
-  margin: 0;
-  line-height: 1.5;
+.app__exp_companyLocation,
+.app__exp_singleDateRange {
+  margin-top: 0.15rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--faint);
 }
-
-// ── Single role (flat — no sub-spine) ─────────────────────────────────────────
 
 .app__exp_singleDateRange {
-  font-size: 12.5px;
-  color: var(--exp-role-meta);
-  margin: 0 0 10px;
+  margin-bottom: 0.65rem;
 }
 
-// ── Roles container (multiple roles — has inner sub-spine) ────────────────────
-
-.app__exp_roles {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  margin-top: 10px;
-
-  // Inner spine connecting sub-dots
-  &::before {
-    content: '';
-    position: absolute;
-    left: -15px;
-    top: 8px;
-    bottom: 8px;
-    width: 1px;
-    background: var(--exp-sub-spine);
-  }
-}
-
-// ── Individual role row ────────────────────────────────────────────────────────
-
-.app__exp_role {
-  position: relative;
-  padding-bottom: 18px;
-
-  &:last-child {
-    padding-bottom: 0;
-  }
-}
-
-.app__exp_subDot {
-  position: absolute;
-  left: -18px;
-  top: 5px;
-  width: $subdot-size;
-  height: $subdot-size;
-  border-radius: 50%;
-  background: var(--exp-subdot-bg);
-  border: 1.5px solid var(--exp-subdot-border);
-}
-
-.app__exp_roleBody {
-  // nothing special — just flow
-}
-
-.app__exp_roleTitle {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--exp-role-title);
-  margin: 0 0 2px;
-  line-height: 1.3;
-}
-
-.app__exp_roleMeta {
-  font-size: 12.5px;
-  color: var(--exp-role-meta);
-  margin: 0 0 8px;
-}
-
-// ── Bullets ───────────────────────────────────────────────────────────────────
-
+/* Bullets */
 .app__exp_bullets {
   list-style: none;
-  margin: 0 0 10px;
-  padding: 0;
+  margin-top: 0.6rem;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 0.45rem;
 }
 
 .app__exp_bullet {
   display: flex;
-  gap: 8px;
-  font-size: 13px;
-  color: var(--exp-bullet-text);
+  gap: 0.6rem;
+  font-size: 0.9rem;
   line-height: 1.55;
+  color: var(--muted);
 }
 
 .app__exp_bulletDot {
   flex-shrink: 0;
-  width: 4px;
-  height: 4px;
+  margin-top: 0.55rem;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
-  background: var(--exp-bullet-dot);
-  margin-top: 7px;
+  background: var(--secondary);
+  opacity: 0.6;
 }
 
-// ── Skills ────────────────────────────────────────────────────────────────────
-
+/* Skill tags */
 .app__exp_skills {
+  margin-top: 0.85rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 8px;
+  gap: 0.4rem;
 }
 
 .app__exp_skillTag {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  font-size: 12px;
-  color: var(--exp-tag-text);
-  background: var(--exp-tag-bg);
-  border: 1px solid var(--exp-tag-border);
-  border-radius: 20px;
-  padding: 3px 10px 3px 8px;
+  gap: 0.3rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(49, 59, 172, 0.15);
+  background: rgba(49, 59, 172, 0.06);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--accent-700, #2a3291);
   white-space: nowrap;
   transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
 
-  svg {
-    flex-shrink: 0;
-  }
+.app__exp_skillTag svg {
+  flex-shrink: 0;
+  opacity: 0.6;
+}
 
-  &:hover {
-    color: var(--exp-tag-hover-text);
-    background: var(--exp-tag-hover-bg);
-    border-color: var(--exp-tag-hover-border);
-  }
+.app__exp_skillTag:hover {
+  color: var(--secondary);
+  background: rgba(49, 59, 172, 0.11);
+  border-color: rgba(49, 59, 172, 0.3);
+}
+
+/* Sub-roles (multiple positions in one company) */
+.app__exp_roles {
+  position: relative;
+  margin-top: 0.85rem;
+  padding-left: 1.35rem;
+}
+
+.app__exp_roles::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 6px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--line);
+}
+
+.app__exp_role {
+  position: relative;
+  padding-bottom: 1.1rem;
+}
+
+.app__exp_role:last-child {
+  padding-bottom: 0;
+}
+
+.app__exp_subDot {
+  position: absolute;
+  left: -1.4rem;
+  top: 6px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--secondary);
+  box-shadow: 0 0 0 3px rgba(49, 59, 172, 0.12);
+}
+
+.app__exp_roleBody {
+  min-width: 0;
+}
+
+.app__exp_roleTitle {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.app__exp_roleMeta {
+  margin-top: 0.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--faint);
 }
