@@ -14,11 +14,11 @@ import {
 import { BsGithub, BsInstagram } from "react-icons/bs";
 import { FaFacebookF } from "react-icons/fa";
 import { motion } from "framer-motion";
-import { client } from "@/client";
 import { variable } from "@/constants";
 import { Section } from "@/components/Section";
 import Reveal from "@/components/Reveal";
 import { cn } from "@/lib/utils";
+import { submitContact } from "@/lib/actions/contact.actions";
 
 type Form = { name: string; email: string; message: string };
 type Errors = Partial<Record<keyof Form, string>>;
@@ -77,8 +77,8 @@ export default function Footer() {
     }
     try {
       setStatus("loading");
-      await client.create({ _type: "contact", ...form });
-      setStatus("success");
+      const result = await submitContact(form);
+      setStatus(result.success ? "success" : "error");
     } catch {
       setStatus("error");
     }

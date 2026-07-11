@@ -11,8 +11,7 @@ const nextConfig = {
     sourceMap: true,
   } */
   env : {
-    SANITY_PROJECT_ID : process.env.REACT_APP_SANITY_PROJECT_ID,
-    SANITY_TOKEN : process.env.REACT_APP_SANITY_TOKEN
+    SANITY_PROJECT_ID : process.env.REACT_APP_SANITY_PROJECT_ID
   },
   images : {
     remotePatterns : [
