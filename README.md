@@ -1,65 +1,88 @@
-# 🚀 Next.js 16 Portfolio
+# Fitiavana's Portfolio
 
-A high-performance personal portfolio built with **Next.js 16**, **TypeScript**, and **Tailwind CSS**. This project leverages the latest React Server Components (RSC) and the App Router for optimal SEO and speed.
+A responsive portfolio for Fitiavana, a full-stack developer and data scientist. It presents selected work, skills, experience, testimonials, and a contact form in a motion-rich single-page experience.
 
-## 🛠️ Tech Stack
+[View the live site](https://fitiavanasambatraportfolio.netlify.app/)
 
-* **Framework:** Next.js 16 (App Router)
-* **Language:** TypeScript
-* **Styling:** Tailwind CSS
-* **Package Manager:** pnpm
-* **Deployment:** netlify
+## Features
 
-## 🏁 Getting Started
+- Filterable project gallery with Sanity-backed content and local fallbacks
+- Skills and experience loaded from Sanity
+- Validated contact form that stores submissions in Sanity and sends email through Brevo
+- Smooth scrolling, section reveals, and Framer Motion interactions
+- Responsive, accessible layout with a skip link and keyboard-friendly controls
+- Static rendering and optimized images and fonts through Next.js
 
-### 1. Prerequisites
+## Tech stack
 
-Ensure you have Node.js 18.17.0 or later and **pnpm** installed.
+- Next.js 16 and React 19
+- TypeScript
+- Tailwind CSS and Sass modules
+- Framer Motion and Lenis
+- Sanity
+- Brevo transactional email
+- Netlify
 
-> **Note:** If you are using TypeScript, ensure you are on version **v5.1.0** or higher to maintain compatibility with Next.js 16.
+## Getting started
 
-### 2. Installation
+### Prerequisites
 
-Clone the repository and install dependencies:
+- Node.js 22 (see `.nvmrc`)
+- [pnpm](https://pnpm.io/installation)
+
+### Installation
 
 ```bash
+git clone https://github.com/GhosTHaise/Portfolio-2023-GhosT.git
+cd Portfolio-2023-GhosT
 pnpm install
-
+cp .env.example .env.local
 ```
 
-### 3. Development
-
-Run the development server:
+Update `.env.local` with your service credentials, then start the development server:
 
 ```bash
 pnpm dev
-
 ```
 
-Open [http://localhost:3000](https://www.google.com/search?q=http://localhost:3000) to view your site. The page will hot-reload as you make changes to files in the `app/` directory.
+Open [http://localhost:3000](http://localhost:3000).
 
-## 📁 Project Structure
+## Environment variables
 
-* `app/`: Contains the routes, layouts, and pages.
-* `components/`: Reusable UI components (Atomic Design recommended).
-* `public/`: Static assets like images and fonts.
-* `lib/`: Utility functions and shared logic.
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `BREVO_API_KEY` | Yes, for contact email | Brevo API credential |
+| `BREVO_SENDER_EMAIL` | Yes, for contact email | Verified Brevo sender address |
+| `BREVO_SENDER_NAME` | No | Display name for contact emails |
+| `CONTACT_RECEIVER_EMAIL` | No | Contact recipient; defaults to the portfolio owner |
+| `REACT_APP_SANITY_PROJECT_ID` | Yes, for CMS content | Sanity project identifier |
+| `SANITY_TOKEN` | Yes, for contact submissions | Sanity write token |
 
-## 🚀 Key Features
+Keep these values server-side and never commit `.env.local`.
 
-* **Next/Font:** Automatically optimizes and loads Inter, reducing layout shift.
-* **Server Components:** Minimal client-side JavaScript for faster initial loads.
-* **Type Safety:** Strict TypeScript configuration for robust development.
-* **SEO Optimized:** Built-in Metadata API for better search engine ranking.
+## Available commands
 
-## 📖 Deployment
+```bash
+pnpm dev      # start the development server
+pnpm build    # create a production build
+pnpm start    # run the production server
+pnpm lint     # run ESLint
+```
 
-The easiest way to deploy this portfolio is via the [Vercel Platform](https://vercel.com/new).
+## Project structure
 
-1. Push your code to GitHub.
-2. Import the project into Vercel.
-3. Vercel will automatically detect Next.js and handle the build process.
+```text
+app/          App Router entry points and metadata
+Container/    Page sections such as About, Work, Skills, and Contact
+components/   Shared navigation, layout, motion, and UI components
+constants/    Images and portfolio constants
+lib/actions/  Sanity queries and contact-form server actions
+styles/       Global styles
+assets/       Source images and icons
+public/       Public static files
+tests/        Playwright test suite
+```
 
----
+## Deployment
 
-Would you like me to help you draft a **Technical Skills** or **Projects** section to showcase your experience with React and Node.js?
+The repository includes `netlify.toml` for Netlify. Configure the environment variables in the Netlify dashboard, connect the repository, and deploy; Netlify runs `next build` and publishes the `.next` output.
